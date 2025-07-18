@@ -149,6 +149,7 @@ while true; do
 
             if [[ "${#goldsrc_choices[@]}" -gt 0 ]]; then
                 while true; do
+                    clear
                     echo
                     echo "Which version of the Goldsrc games do you want?"
                     echo
