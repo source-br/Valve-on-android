@@ -41,11 +41,11 @@ while true; do
 
     add_goldsrc_25() {
         commands+=(
-            "-app 70  -depot 1   -dir goldsrc_new"
-            "-app 130 -depot 130 -dir goldsrc_new"
-            "-app 50  -depot 51  -dir goldsrc_new"
-            "-app 10  -depot 11  -dir goldsrc_new"
-            "-app 20  -depot 21  -dir goldsrc_new"
+            "-app 70  -depot 1   -dir goldsrc"
+            "-app 130 -depot 130 -dir goldsrc"
+            "-app 50  -depot 51  -dir goldsrc"
+            "-app 10  -depot 11  -dir goldsrc"
+            "-app 20  -depot 21  -dir goldsrc"
         )
     }
 
@@ -170,11 +170,11 @@ while true; do
                     for choice in "${goldsrc_choices[@]}"; do
                         if [[ "$manual_version" == "1" || "$manual_version" == "3" ]]; then
                             case "$choice" in
-                                9)  commands+=("-app 70  -depot 1   -dir goldsrc_new") ;;
-                                10) commands+=("-app 130 -depot 130 -dir goldsrc_new") ;;
-                                11) commands+=("-app 50  -depot 51  -dir goldsrc_new") ;;
-                                12) commands+=("-app 10  -depot 11  -dir goldsrc_new") ;;
-                                13) commands+=("-app 20  -depot 21  -dir goldsrc_new") ;;
+                                9)  commands+=("-app 70  -depot 1   -dir goldsrc") ;;
+                                10) commands+=("-app 130 -depot 130 -dir goldsrc") ;;
+                                11) commands+=("-app 50  -depot 51  -dir goldsrc") ;;
+                                12) commands+=("-app 10  -depot 11  -dir goldsrc") ;;
+                                13) commands+=("-app 20  -depot 21  -dir goldsrc") ;;
                             esac
                         fi
                         if [[ "$manual_version" == "2" || "$manual_version" == "3" ]]; then
