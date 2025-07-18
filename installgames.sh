@@ -28,7 +28,7 @@ while true; do
         exit 0
     fi
 
-    # Funções
+    # Functions
     add_goldsrc_pre25() {
         commands+=(
             "-branch steam_legacy -app 70  -depot 1   -dir goldsrc_old"
@@ -221,7 +221,7 @@ while true; do
         continue
     fi
 
-    # Login só agora
+    # Request for login
     echo
     read -p "Enter your Steam username: " username
     echo -n "Enter your Steam password: "
