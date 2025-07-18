@@ -31,11 +31,11 @@ while true; do
     # Funções
     add_goldsrc_pre25() {
         commands+=(
-            "-beta steam_legacy -app 70  -depot 1   -dir goldsrc_old"
-            "-beta steam_legacy -app 130 -depot 130 -dir goldsrc_old"
-            "-beta steam_legacy -app 50  -depot 51  -dir goldsrc_old"
-            "-beta steam_legacy -app 10  -depot 11  -dir goldsrc_old"
-            "-beta steam_legacy -app 20  -depot 21  -dir goldsrc_old"
+            "-branch steam_legacy -app 70  -depot 1   -dir goldsrc_old"
+            "-branch steam_legacy -app 130 -depot 130 -dir goldsrc_old"
+            "-branch steam_legacy -app 50  -depot 51  -dir goldsrc_old"
+            "-branch steam_legacy -app 10  -depot 11  -dir goldsrc_old"
+            "-branch steam_legacy -app 20  -depot 21  -dir goldsrc_old"
         )
     }
 
@@ -55,7 +55,7 @@ while true; do
             "-app 220 -depot 389 -dir source"
             "-app 220 -depot 380 -dir source"
             "-app 220 -depot 420 -dir source"
-            "-beta previous_build -app 240 -depot 241 -dir source"
+            "-branch previous_build -app 240 -depot 241 -dir source"
         )
     }
 
@@ -140,7 +140,7 @@ while true; do
                     3) commands+=("-app 220 -depot 380 -dir source") ;;
                     4) commands+=("-app 220 -depot 420 -dir source") ;;
                     5) commands+=("-app 220 -depot 380 -dir source") ;;
-                    6) commands+=("-app 240 -depot 241 -dir source -beta previous_build") ;;
+                    6) commands+=("-app 240 -depot 241 -dir source -branch previous_build") ;;
                     7) commands+=("-app 300 -depot 301 -dir source") ;;
                     8) commands+=("-app 400 -depot 401 -dir source") ;;
                     9|10|11|12|13) goldsrc_choices+=("$choice") ;;
