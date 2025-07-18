@@ -81,9 +81,9 @@ while true; do
             echo "Which version of the Goldsrc games do you want?"
             echo
             echo "1) 25th Anniversary version"
-            echo -e "${YELLOW}! Warning: Newer version, better for Xash (new engine)${RESET}"
+            echo -e "${YELLOW}! Warning: Newer version, better for Xash3D-FWGS (New engine)${RESET}"
             echo "2) Pre-25th Anniversary version"
-            echo -e "${YELLOW}! Warning: Older version, better for mods and Xash old engine${RESET}"
+            echo -e "${YELLOW}! Warning: Older version, better for mods and Xash3D (Old engine)${RESET}"
             echo "3) Both"
             echo -e "${RED}b) Back${RESET}"
             echo "============================"
