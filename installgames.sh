@@ -9,6 +9,11 @@ BLUE="\033[34m"
 GREEN="\033[32m"
 RED="\033[31m"
 
+if ! command -v depotdownloader >/dev/null 2>&1; then
+    echo -e "${RED}Error:${RESET} DepotDownloader is required but not found.\nPlease install it as mentioned in README and try again."
+    exit 1
+fi
+
 while true; do
     commands=()
     back_to_main=false
