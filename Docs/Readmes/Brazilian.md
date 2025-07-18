@@ -6,8 +6,6 @@
     </a>
 </div>
 
-<div align="center">
-
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=27&pause=1000&color=ff5500&center=true&vCenter=true&repeat=true&width=1000&lines=Valve+no+Android)](https://git.io/typing-svg)
 
 [![Discord](https://img.shields.io/discord/1189628376504340590?logo=Discord&label=Servidor%20do%20Discord&color=ff5500)](https://discord.gg/tVNv6SNZZT)
