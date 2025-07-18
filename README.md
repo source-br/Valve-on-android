@@ -17,5 +17,6 @@ chmod +x installgames.sh
 ./installgames.sh
 ```
 
+<img width="2382" height="945" alt="1000183744" src="https://github.com/user-attachments/assets/9d7d1c9e-9b08-45ff-ac71-1170e0e7ba20" />
 
 <img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=ff5500&height=85&section=footer"/>
