@@ -31,31 +31,35 @@ while true; do
     # Functions
     add_goldsrc_pre25() {
         commands+=(
-            "-branch steam_legacy -app 70  -depot 1   -dir goldsrc_old"
-            "-branch steam_legacy -app 130 -depot 130 -dir goldsrc_old"
-            "-branch steam_legacy -app 50  -depot 51  -dir goldsrc_old"
-            "-branch steam_legacy -app 10  -depot 11  -dir goldsrc_old"
-            "-branch steam_legacy -app 20  -depot 21  -dir goldsrc_old"
+            "-branch steam_legacy -app 70  -depot 1   -dir goldsrc_old" # Half-Life
+            "-app 130 -depot 130 -dir goldsrc_old" # Half-Life: Blue Shift
+            "-app 50  -depot 51  -dir goldsrc_old" # Half-Life: Opposing Force
+            "-branch steam_legacy -app 10  -depot 11  -dir goldsrc_old" # Counter-Strike
+            "-branch steam_legacy -app 20  -depot 21  -dir goldsrc_old" # Team Fortress Classic
         )
     }
 
     add_goldsrc_25() {
         commands+=(
-            "-app 70  -depot 1   -dir goldsrc"
-            "-app 130 -depot 130 -dir goldsrc"
-            "-app 50  -depot 51  -dir goldsrc"
-            "-app 10  -depot 11  -dir goldsrc"
-            "-app 20  -depot 21  -dir goldsrc"
+            "-app 70  -depot 1   -dir goldsrc" # Half-Life
+            "-app 130 -depot 130 -dir goldsrc" # Half-Life: Blue Shift
+            "-app 50  -depot 51  -dir goldsrc" # Half-Life: Opposing Force
+            "-app 10  -depot 11  -dir goldsrc" # Counter-Strike
+            "-app 20  -depot 21  -dir goldsrc" # Team Fortress Classic
         )
     }
 
     add_source() {
         commands+=(
-            "-app 220 -depot 221 -dir source"
-            "-app 220 -depot 389 -dir source"
-            "-app 220 -depot 380 -dir source"
-            "-app 220 -depot 420 -dir source"
-            "-branch previous_build -app 240 -depot 241 -dir source"
+            "-branch steam_legacy -app 220 -depot 221 -dir source" # Half-Life 2
+            "-branch steam_legacy -app 220 -depot 389 -dir source" # Half-Life 2: Episode 1
+            "-branch steam_legacy -app 220 -depot 380 -dir source" # Half-Life 2: Episode 1 (maps)
+            "-branch steam_legacy -app 220 -depot 420 -dir source" # Half-Life 2: Episode 2
+            "-branch steam_legacy -app 320 -depot 321 -dir source" # Half-Life 2: Deathmatch
+            "-app 280 -depot 280 -dir source" # Half-Life: Source
+            "-branch previous_build -app 240 -depot 241 -dir source" # Counter-Strike: Source
+            "-branch previous_build -app 300 -depot 301 -dir source" # Day of Defeat: Source
+            "-app 400 -depot 401 -dir source" # Portal
         )
     }
 
@@ -135,15 +139,18 @@ while true; do
 
             for choice in "${choices[@]}"; do
                 case "$choice" in
-                    1) commands+=("-branch steam_legacy -app 220 -depot 221 -dir source") ;;
-                    2) commands+=("-branch steam_legacy -app 220 -depot 389 -dir source") ;;
-                    3) commands+=("-branch steam_legacy -app 220 -depot 380 -dir source") ;;
-                    4) commands+=("-branch steam_legacy -app 220 -depot 420 -dir source") ;;
-                    5) commands+=("-branch steam_legacy -app 220 -depot 380 -dir source") ;;
-                    6) commands+=("-app 240 -depot 241 -dir source -branch previous_build") ;;
-                    7) commands+=("-branch previous_build -app 300 -depot 301 -dir source") ;;
-                    8) commands+=("-app 400 -depot 401 -dir source") ;;
-                    9|10|11|12|13) goldsrc_choices+=("$choice") ;;
+                    1) commands+=("-branch steam_legacy -app 220 -depot 221 -dir source") ;; # Half-Life 2
+                    2) 
+                    commands+=("-branch steam_legacy -app 220 -depot 389 -dir source") # Half-Life 2: Episode 1
+                    commands+=("-branch steam_legacy -app 220 -depot 380 -dir source") # Half-Life 2: Episode 1 (maps)
+                    ;;
+                    3) commands+=("-branch steam_legacy -app 220 -depot 420 -dir source") ;; # Half-Life 2: Episode 2
+                    4) commands+=("-branch steam_legacy -app 320 -depot 321 -dir source") ;; # Half-Life 2: Deathmatch
+                    5) commands+=("-app 280 -depot 280 -dir source") ;; # Half-Life: Source
+                    6) commands+=("-branch previous_build -app 240 -depot 241 -dir source ") ;; # Counter-Strike: Source
+                    7) commands+=("-branch previous_build -app 300 -depot 301 -dir source") ;; # Day of Defeat: Source
+                    8) commands+=("-app 400 -depot 401 -dir source") ;; # Portal
+                    9|10|11|12|13) goldsrc_choices+=("$choice") ;; # Goldsrc games
                 esac
             done
 
@@ -170,20 +177,20 @@ while true; do
                     for choice in "${goldsrc_choices[@]}"; do
                         if [[ "$manual_version" == "1" || "$manual_version" == "3" ]]; then
                             case "$choice" in
-                                9)  commands+=("-app 70  -depot 1   -dir goldsrc") ;;
-                                10) commands+=("-app 130 -depot 130 -dir goldsrc") ;;
-                                11) commands+=("-app 50  -depot 51  -dir goldsrc") ;;
-                                12) commands+=("-app 10  -depot 11  -dir goldsrc") ;;
-                                13) commands+=("-app 20  -depot 21  -dir goldsrc") ;;
+                                9)  commands+=("-app 70  -depot 1   -dir goldsrc") ;; # Half-Life
+                                10) commands+=("-app 130 -depot 130 -dir goldsrc") ;; # Half-Life: Blue Shift
+                                11) commands+=("-app 50  -depot 51  -dir goldsrc") ;; # Half-Life: Opposing Force
+                                12) commands+=("-app 10  -depot 11  -dir goldsrc") ;; # Counter-Strike
+                                13) commands+=("-app 20  -depot 21  -dir goldsrc") ;; # Team Fortress Classic
                             esac
                         fi
                         if [[ "$manual_version" == "2" || "$manual_version" == "3" ]]; then
                             case "$choice" in
-                                9)  commands+=("-branch steam_legacy -app 70  -depot 1   -dir goldsrc_old") ;;
-                                10) commands+=("-branch steam_legacy -app 130 -depot 130 -dir goldsrc_old") ;;
-                                11) commands+=("-branch steam_legacy -app 50  -depot 51  -dir goldsrc_old") ;;
-                                12) commands+=("-branch steam_legacy -app 10  -depot 11  -dir goldsrc_old") ;;
-                                13) commands+=("-branch steam_legacy -app 20  -depot 21  -dir goldsrc_old") ;;
+                                9)  commands+=("-branch steam_legacy -app 70  -depot 1   -dir goldsrc_old") ;; # Half-Life
+                                10) commands+=("-app 130 -depot 130 -dir goldsrc_old") ;; # Half-Life: Blue Shift
+                                11) commands+=("-app 50  -depot 51  -dir goldsrc_old") ;; # Half-Life: Opposing Force
+                                12) commands+=("-branch steam_legacy -app 10  -depot 11  -dir goldsrc_old") ;; # Counter-Strike
+                                13) commands+=("-branch steam_legacy -app 20  -depot 21  -dir goldsrc_old") ;; # Team Fortress Classic
                             esac
                         fi
                     done
