@@ -10,11 +10,13 @@
 
 [![Discord](https://img.shields.io/discord/1189628376504340590?logo=Discord&label=Servidor%20do%20Discord&color=ff5500)](https://discord.gg/tVNv6SNZZT)
 
-Este projeto tem como objetivo facilitar o download de jogos da Valve no Android de forma legal.
+Este projeto tem como objetivo facilitar o download de jogos da Valve no Android de forma legal e documentar como jogar eles.
+
+Vejam a [Documentação](../PT-BR/Documentação.md)
 
 valve-on-android é uma ferramenta para Termux que utiliza o [TermuxDepotDownloader](https://github.com/TheKingFireS/TermuxDepotDownloader) feito por [TheKingFireS](https://github.com/TheKingFireS)
 
-Essa ferramenta exige que o TermuxDepotDownloader já esteja instalado no seu Termux. Você pode baixá-lo aqui
+Essa ferramenta exige que o TermuxDepotDownloader já esteja instalado no seu Termux. Você pode baixá-lo [aqui]((https://github.com/TheKingFireS/TermuxDepotDownloader))
 
 Copie e cole este texto no Termux para configurar este repositório:
 ```
