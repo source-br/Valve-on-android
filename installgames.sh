@@ -9,20 +9,35 @@ BLUE="\033[34m"
 GREEN="\033[32m"
 RED="\033[31m"
 
+# Seleção de idioma no início do script
+while true; do
+    clear
+    echo -e "Select language"
+    echo -e "1) English"
+    echo -e "2) Português (Brasil)"
+    echo -e "============================"
+    read -p "Choice: " lang_option
+
+    case "$lang_option" in
+        1)
+            source english.sh
+            break
+            ;;
+        2)
+            source brazilian.sh
+            break
+            ;;
+        *)
+            echo -e "\nInvalid option / Opção inválida. Try again..."
+            sleep 2
+            ;;
+    esac
+done
+
 if ! command -v depotdownloader >/dev/null 2>&1; then
-    echo -e "${RED}Error:${RESET} DepotDownloader is required but not found.\nPlease install it as mentioned in README and try again."
+    echo -e "${RED}$LANG_ERROR:${RESET} $LANG_DEPOT"
     exit 1
 fi
-
-# language
-LANG_CHOICE="${1:-pt}"
-
-if [[ "$LANG_CHOICE" == "en" ]]; then
-    source english.sh
-else
-    source brazilian.sh
-fi
-
 
 while true; do
     commands=()
@@ -39,7 +54,7 @@ while true; do
     read -p "$LANG_PROMPT_CHOOSE" main_menu
 
     if [[ "$main_menu" == "3" ]]; then
-        echo "${RED}$LANG_EXITING${RESET}"
+        echo -e "${RED}$LANG_EXITING${RESET}"
         exit 0
     fi
 
