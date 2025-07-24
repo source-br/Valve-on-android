@@ -232,7 +232,7 @@ while true; do
         fi
 
     else
-        echo "${RED$LANG_INVALID_OPTION${RESET}"
+        echo "${RED}$LANG_INVALID_OPTION${RESET}"
         sleep 2
         continue
     fi
