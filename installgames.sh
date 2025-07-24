@@ -32,11 +32,11 @@ while true; do
     echo
     echo "$LANG_TITLE"
     echo
-    echo "1) All games"
-    echo "2) Select manually"
-    echo -e "${RED}3) Exit${RESET}"
+    echo "1) $LANG_MAIN_OPTION_ALL"
+    echo "2) $LANG_MAIN_OPTION_MANUAL"
+    echo -e "${RED}3) $LANG_MAIN_OPTION_EXIT${RESET}"
     echo
-    read -p "Choose an option (1-3): " main_menu
+    read -p "$LANG_PROMPT_CHOOSE" main_menu
 
     if [[ "$main_menu" == "3" ]]; then
         echo "Exiting..."
@@ -245,8 +245,8 @@ while true; do
 
     # Request for login
     echo
-    read -p "Enter your Steam username: " username
-    echo -n "Enter your Steam password: "
+    read -p "$LANG_ENTER_USERNAME" username
+    echo -n "$LANG_ENTER_PASSWORD"
     password=""
     while IFS= read -r -s -n1 char; do
         if [[ -z "$char" ]]; then
