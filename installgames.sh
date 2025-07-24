@@ -34,6 +34,46 @@ while true; do
     esac
 done
 
+# Langs Depots
+declare -A HL2_LANG_DEPOTS=(
+    [french]=227 [german]=228 [russian]=225 [spanish]=226
+    [korean]=229 [tchinese]=230 [schinese]=231 [italian]=232
+)
+
+declare -A HL2_EP1_LANG_DEPOTS=(
+    [french]=381 [german]=382 [russian]=383 [spanish]=384
+    [korean]=385 [tchinese]=386 [schinese]=387 [italian]=388
+)
+
+declare -A HL2_EP2_LANG_DEPOTS=(
+    [french]=421 [german]=422 [russian]=423 [spanish]=424
+)
+declare -A CSS_LANG_DEPOTS=(
+    [french]=243 [italian]=244 [german]=245 [spanish]=246
+    [schinese]=247 [korean]=249 [tchinese]=250 [japonese]=251
+    [russian]=252 [thai]=253
+)
+declare -A PORTAL_LANG_DEPOTS=(
+    [spanish]=406 [russian]=405 [french]=407 [german]=408
+)
+declare -A HL_LANG_DEPOTS=(
+    [french]=72 [italian]=73 [german]=74 [spanish]=75 
+    [schinese]=77 [korean]=78 [tchinese]=79 [russian]=141
+)
+declare -A HLBS_LANG_DEPOTS=(
+    [french]=131 [german]=132 
+)
+declare -A HLOF_LANG_DEPOTS=(
+    [german]=52 [french]=53 [korean]=56 
+)
+declare -A CS_LANG_DEPOTS=(
+    [french]=12 [italian]=13 [german]=14 [spanish]=15
+    [schinese]=17 [korean]=18 [tchinese]=19 [russian]=142
+)
+declare -A TFC_LANG_DEPOTS=(
+    [french]=22 [italian]=23 [german]=24 [spanish]=25
+)
+
 if ! command -v depotdownloader >/dev/null 2>&1; then
     echo -e "${RED}$LANG_ERROR:${RESET} $LANG_DEPOT"
     exit 1
@@ -51,7 +91,7 @@ while true; do
     echo "2) $LANG_MAIN_OPTION_MANUAL"
     echo -e "${RED}3) $LANG_MAIN_OPTION_EXIT${RESET}"
     echo
-    read -p "$LANG_PROMPT_CHOOSE" main_menu
+    read -p "$LANG_PROMPT_CHOOSE " main_menu
 
     if [[ "$main_menu" == "3" ]]; then
         echo -e "${RED}$LANG_EXITING${RESET}"
@@ -62,8 +102,6 @@ while true; do
     add_goldsrc_pre25() {
         commands+=(
             "-branch steam_legacy -app 70  -depot 1   -dir goldsrc_old" # Half-Life
-            "-app 130 -depot 130 -dir goldsrc_old" # Half-Life: Blue Shift
-            "-app 50  -depot 51  -dir goldsrc_old" # Half-Life: Opposing Force
             "-branch steam_legacy -app 10  -depot 11  -dir goldsrc_old" # Counter-Strike
             "-branch steam_legacy -app 20  -depot 21  -dir goldsrc_old" # Team Fortress Classic
         )
@@ -103,7 +141,7 @@ while true; do
         echo "3) $LANG_DOWNLOADS_OPTION_ALL_GOLDSRC"
         echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
         echo "============================"
-        read -p "$LANG_PROMPT_CHOOSE" all_option
+        read -p "$LANG_PROMPT_CHOOSE " all_option
 
         if [[ "$all_option" == "b" ]]; then
             continue
@@ -121,7 +159,7 @@ while true; do
             echo "3) $LANG_OPTION_BOTH"
             echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
             echo "============================"
-            read -p "$LANG_PROMPT_CHOOSE" goldsrc_version
+            read -p "$LANG_PROMPT_CHOOSE " goldsrc_version
 
             if [[ "$goldsrc_version" == "b" ]]; then
                 continue
@@ -157,7 +195,7 @@ while true; do
             echo -e "${YELLOW}13) Team Fortress Classic${RESET}"
             echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
             echo "============================"
-            read -p "$LANG_PROMPT_CHOOSE_GAMES" selections
+            read -p "$LANG_PROMPT_CHOOSE_GAMES " selections
 
             if [[ "$selections" == "b" ]]; then
                 back_to_main=true
@@ -197,7 +235,7 @@ while true; do
                     echo "3) $LANG_OPTION_BOTH"
                     echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
                     echo "============================"
-                    read -p "$LANG_PROMPT_CHOOSE" manual_version
+                    read -p "$LANG_PROMPT_CHOOSE " manual_version
 
                     if [[ "$manual_version" == "b" ]]; then
                         back_to_main=true
@@ -207,20 +245,20 @@ while true; do
                     for choice in "${goldsrc_choices[@]}"; do
                         if [[ "$manual_version" == "1" || "$manual_version" == "3" ]]; then
                             case "$choice" in
-                                9)  commands+=("-app 70  -depot 1   -dir goldsrc") ;; # Half-Life
+                                9)  commands+=("-app 70 -depot 1 -dir goldsrc") ;; # Half-Life
                                 10) commands+=("-app 130 -depot 130 -dir goldsrc") ;; # Half-Life: Blue Shift
-                                11) commands+=("-app 50  -depot 51  -dir goldsrc") ;; # Half-Life: Opposing Force
-                                12) commands+=("-app 10  -depot 11  -dir goldsrc") ;; # Counter-Strike
-                                13) commands+=("-app 20  -depot 21  -dir goldsrc") ;; # Team Fortress Classic
+                                11) commands+=("-app 50 -depot 51 -dir goldsrc") ;; # Half-Life: Opposing Force
+                                12) commands+=("-app 10 -depot 11 -dir goldsrc") ;; # Counter-Strike
+                                13) commands+=("-app 20 -depot 21 -dir goldsrc") ;; # Team Fortress Classic
                             esac
                         fi
                         if [[ "$manual_version" == "2" || "$manual_version" == "3" ]]; then
                             case "$choice" in
-                                9)  commands+=("-branch steam_legacy -app 70  -depot 1   -dir goldsrc_old") ;; # Half-Life
+                                9)  commands+=("-branch steam_legacy -app 70 -depot 1 -dir goldsrc_old") ;; # Half-Life
                                 10) commands+=("-app 130 -depot 130 -dir goldsrc_old") ;; # Half-Life: Blue Shift
-                                11) commands+=("-app 50  -depot 51  -dir goldsrc_old") ;; # Half-Life: Opposing Force
-                                12) commands+=("-branch steam_legacy -app 10  -depot 11  -dir goldsrc_old") ;; # Counter-Strike
-                                13) commands+=("-branch steam_legacy -app 20  -depot 21  -dir goldsrc_old") ;; # Team Fortress Classic
+                                11) commands+=("-app 50 -depot 51 -dir goldsrc_old") ;; # Half-Life: Opposing Force
+                                12) commands+=("-branch steam_legacy -app 10 -depot 11 -dir goldsrc_old") ;; # Counter-Strike
+                                13) commands+=("-branch steam_legacy -app 20 -depot 21 -dir goldsrc_old") ;; # Team Fortress Classic
                             esac
                         fi
                     done
@@ -247,7 +285,7 @@ while true; do
         fi
 
     else
-        echo "${RED}$LANG_INVALID_OPTION${RESET}"
+        echo -e "${RED}$LANG_INVALID_OPTION${RESET}"
         sleep 2
         continue
     fi
@@ -259,9 +297,10 @@ while true; do
     fi
 
     # Request for login
+    clear
     echo
-    read -p "$LANG_ENTER_USERNAME" username
-    echo -n "$LANG_ENTER_PASSWORD"
+    read -p "$LANG_ENTER_USERNAME " username
+    echo -n "$LANG_ENTER_PASSWORD "
     password=""
     while IFS= read -r -s -n1 char; do
         if [[ -z "$char" ]]; then
@@ -279,14 +318,86 @@ while true; do
 
     base_command="depotdownloader -username $username -password '$password' -remember-password -validate"
 
+    clear
+    echo "$LANG_ASK_LANGUAGE_PACKS"
+    echo "1) $LANG_YES"
+    echo "2) $LANG_NO"
+    read -p "$LANG_PROMPT_CHOOSE_YES_NO " choose_langpacks
+
+if [[ "$choose_langpacks" == "1" ]]; then
+    clear
+    echo "$LANG_SELECT_LANGUAGE_PACK"
+    echo "1) English"
+    echo "2) Thai"
+    echo "3) French"
+    echo "4) German"
+    echo "5) Russian"
+    echo "6) Spanish"
+    echo "7) Korean"
+    echo "8) Traditional Chinese"
+    echo "9) Simplified Chinese"
+    echo "10) Italian"
+    read -p "$LANG_PROMPT_CHOOSE_LANGUAGES " lang_choice
+
+    case $lang_choice in
+        1) selected_lang="english" ;;
+        2) selected_lang="thai" ;;
+        3) selected_lang="french" ;;
+        4) selected_lang="german" ;;
+        5) selected_lang="russian" ;;
+        6) selected_lang="spanish" ;;
+        7) selected_lang="korean" ;;
+        8) selected_lang="tchinese" ;;
+        9) selected_lang="schinese" ;;
+        10) selected_lang="italian" ;;
+        *) selected_lang="" ;;
+    esac
+else
+    selected_lang=""
+fi
+
     echo
-    for args in "${commands[@]}"; do
-        echo -e "${BOLD}Running:${RESET} $base_command $args"
-        eval "$base_command $args" || {
-            echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"
-            exit 1
-        }
-    done
+for args in "${commands[@]}"; do
+    echo -e "${BOLD}$LANG_RUNNING${RESET} $base_command $args"
+    $base_command $args || {
+        echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"
+        exit 1
+    }
+
+    # Download languages depots
+    if [[ "$choose_langpacks" == "1" && -n "$selected_lang" ]]; then
+        appid=$(echo "$args" | grep -oP '(?<=-app\s)[0-9]+')
+        depot=$(echo "$args" | grep -oP '(?<=-depot\s)[0-9]+')
+        depot_id=""
+
+        case "$appid" in
+            220)
+                case "$depot" in
+                    221) depot_id="${HL2_LANG_DEPOTS[$selected_lang]} -dir source" ;; # HL2
+                    389|380) depot_id="${HL2_EP1_LANG_DEPOTS[$selected_lang]} -dir source" ;; # HL2: Episode 1 (e maps)
+                    420) depot_id="${HL2_EP2_LANG_DEPOTS[$selected_lang]} -dir source" ;; # HL2: Episode 2
+                esac
+                ;;
+            240) depot_id="${CSS_LANG_DEPOTS[$selected_lang]} -dir source" ;; # Counter-Strike: Source
+            400) depot_id="${PORTAL_LANG_DEPOTS[$selected_lang]} -dir source" ;; # Portal
+            70) depot_id="${HL_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;; # Half-Life
+            130) depot_id="${HLBS_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;; # Blue Shift
+            50) depot_id="${HLOF_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;; # Opposing Force
+            10) depot_id="${CS_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;; # Counter-Strike
+            20) depot_id="${TFC_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;; # Team Fortress Classic
+        esac
+
+
+        if [[ -n "$depot_id" ]]; then
+            echo -e "${GREEN}$LANG_DOWNLOADING_LANGPACK ($selected_lang)${RESET}"
+            eval "$base_command -app $appid -depot $depot_id" || {
+                echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"
+                exit 1
+            }
+        fi
+    fi
+done
+
 
     read -p "$LANG_PRESS_ENTER" _
 done
