@@ -9,14 +9,14 @@ BLUE="\033[34m"
 GREEN="\033[32m"
 RED="\033[31m"
 
-# Seleção de idioma no início do script
+# Language
 while true; do
     clear
-    echo -e "Select language"
+    echo -e "Select language:"
     echo -e "1) English"
     echo -e "2) Português (Brasil)"
     echo -e "============================"
-    read -p "Choice: " lang_option
+    read -p "Choice (1-2): " lang_option
 
     case "$lang_option" in
         1)
@@ -28,7 +28,7 @@ while true; do
             break
             ;;
         *)
-            echo -e "\nInvalid option / Opção inválida. Try again..."
+            echo -e "\nInvalid option. Try again..."
             sleep 2
             ;;
     esac
