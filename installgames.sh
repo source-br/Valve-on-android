@@ -14,13 +14,23 @@ if ! command -v depotdownloader >/dev/null 2>&1; then
     exit 1
 fi
 
+# language
+LANG_CHOICE="${1:-pt}"
+
+if [[ "$LANG_CHOICE" == "en" ]]; then
+    source english.sh
+else
+    source brazilian.sh
+fi
+
+
 while true; do
     commands=()
     back_to_main=false
 
     clear
     echo
-    echo "Which games do you want to download?"
+    echo "$LANG_TITLE"
     echo
     echo "1) All games"
     echo "2) Select manually"
