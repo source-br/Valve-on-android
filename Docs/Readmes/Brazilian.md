@@ -16,11 +16,11 @@ Vejam a [Documentação](../PT-BR/Documentação.md)
 
 valve-on-android é uma ferramenta para Termux que utiliza o [TermuxDepotDownloader](https://github.com/TheKingFireS/TermuxDepotDownloader) feito por [TheKingFireS](https://github.com/TheKingFireS)
 
-Essa ferramenta exige que o TermuxDepotDownloader já esteja instalado no seu Termux. Você pode baixá-lo [aqui]((https://github.com/TheKingFireS/TermuxDepotDownloader))
+Essa ferramenta exige que o TermuxDepotDownloader já esteja instalado no seu Termux. Você pode baixá-lo [aqui](https://github.com/TheKingFireS/TermuxDepotDownloader)
 
 Copie e cole este texto no Termux para configurar este repositório:
 ```
-curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/installgames.sh"
+curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/installgames.sh" && curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/english.sh" && curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/brazilian.sh"
 chmod +x installgames.sh
 ./installgames.sh
 ```

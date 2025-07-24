@@ -9,8 +9,33 @@ BLUE="\033[34m"
 GREEN="\033[32m"
 RED="\033[31m"
 
+# Language
+while true; do
+    clear
+    echo -e "Select language:"
+    echo -e "1) English"
+    echo -e "2) Português (Brasil)"
+    echo -e "============================"
+    read -p "Choice (1-2): " lang_option
+
+    case "$lang_option" in
+        1)
+            source english.sh
+            break
+            ;;
+        2)
+            source brazilian.sh
+            break
+            ;;
+        *)
+            echo -e "\nInvalid option. Try again..."
+            sleep 2
+            ;;
+    esac
+done
+
 if ! command -v depotdownloader >/dev/null 2>&1; then
-    echo -e "${RED}Error:${RESET} DepotDownloader is required but not found.\nPlease install it as mentioned in README and try again."
+    echo -e "${RED}$LANG_ERROR:${RESET} $LANG_DEPOT"
     exit 1
 fi
 
@@ -20,16 +45,16 @@ while true; do
 
     clear
     echo
-    echo "Which games do you want to download?"
+    echo "$LANG_TITLE"
     echo
-    echo "1) All games"
-    echo "2) Select manually"
-    echo -e "${RED}3) Exit${RESET}"
+    echo "1) $LANG_MAIN_OPTION_ALL"
+    echo "2) $LANG_MAIN_OPTION_MANUAL"
+    echo -e "${RED}3) $LANG_MAIN_OPTION_EXIT${RESET}"
     echo
-    read -p "Choose an option (1-3): " main_menu
+    read -p "$LANG_PROMPT_CHOOSE" main_menu
 
     if [[ "$main_menu" == "3" ]]; then
-        echo "Exiting..."
+        echo -e "${RED}$LANG_EXITING${RESET}"
         exit 0
     fi
 
@@ -71,14 +96,14 @@ while true; do
     if [[ "$main_menu" == "1" ]]; then
         clear
         echo
-        echo "Which games do you want to download?"
+        echo "$LANG_DOWNLOADS_OPTION_ALL_TITLE"
         echo
-        echo "1) All games"
-        echo "2) All Source games"
-        echo "3) All Goldsrc games"
-        echo -e "${RED}b) Back${RESET}"
+        echo "1) $LANG_MAIN_OPTION_ALL"
+        echo "2) $LANG_DOWNLOADS_OPTION_ALL_SOURCE"
+        echo "3) $LANG_DOWNLOADS_OPTION_ALL_GOLDSRC"
+        echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
         echo "============================"
-        read -p "Choose an option (1-3): " all_option
+        read -p "$LANG_PROMPT_CHOOSE" all_option
 
         if [[ "$all_option" == "b" ]]; then
             continue
@@ -87,16 +112,16 @@ while true; do
         if [[ "$all_option" == "1" || "$all_option" == "3" ]]; then
             clear
             echo
-            echo "Which version of the Goldsrc games do you want?"
+            echo "$LANG_GOLDSRCVERSION_TITLE"
             echo
-            echo "1) 25th Anniversary version"
-            echo -e "${YELLOW}! Warning: Newer version, better for Xash3D-FWGS (New engine)${RESET}"
-            echo "2) Pre-25th Anniversary version"
-            echo -e "${YELLOW}! Warning: Older version, better for Xash3D-FWGS (Old engine)${RESET}"
-            echo "3) Both"
-            echo -e "${RED}b) Back${RESET}"
+            echo "1) $LANG_GOLDSRCVERSION_OPTION_25TH"
+            echo -e "${YELLOW}$LANG_WARNING_NEW_VERSION${RESET}"
+            echo "2) $LANG_GOLDSRCVERSION_OPTION_PRE25TH"
+            echo -e "${YELLOW}$LANG_WARNING_OLD_VERSION${RESET}"
+            echo "3) $LANG_OPTION_BOTH"
+            echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
             echo "============================"
-            read -p "Choose an option (1-3): " goldsrc_version
+            read -p "$LANG_PROMPT_CHOOSE" goldsrc_version
 
             if [[ "$goldsrc_version" == "b" ]]; then
                 continue
@@ -112,9 +137,9 @@ while true; do
         while true; do
             clear
             echo
-            echo "Which games do you want to download?"
+            echo "$LANG_GAMES_TITLE"
             echo
-            echo -e "${BOLD}Source Games:${RESET}"
+            echo -e "${BOLD}$LANG_GAMES_TITLE_SOURCE${RESET}"
             echo -e "${ORANGE}1) Half-Life 2${RESET}"
             echo -e "${ORANGE}2) Half-Life 2: Episode 1${RESET}"
             echo -e "${ORANGE}3) Half-Life 2: Episode 2${RESET}"
@@ -124,15 +149,15 @@ while true; do
             echo "7) Day of Defeat: Source"
             echo -e "${BLUE}8) Portal${RESET}"
             echo
-            echo -e "${BOLD}Goldsrc Games:${RESET}"
+            echo -e "${BOLD}$LANG_GAMES_TITLE_GOLDSRC${RESET}"
             echo -e "${ORANGE}9) Half-Life${RESET}"
             echo -e "${BLUE}10) Half-Life: Blue Shift${RESET}"
             echo -e "${GREEN}11) Half-Life: Opposing Force${RESET}"
             echo "12) Counter-Strike"
             echo -e "${YELLOW}13) Team Fortress Classic${RESET}"
-            echo -e "${RED}b) Back${RESET}"
+            echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
             echo "============================"
-            read -p "Choose one or more options, separated by commas Ex:1,3 (1-13): " selections
+            read -p "$LANG_PROMPT_CHOOSE_GAMES" selections
 
             if [[ "$selections" == "b" ]]; then
                 back_to_main=true
@@ -163,16 +188,16 @@ while true; do
                 while true; do
                     clear
                     echo
-                    echo "Which version of the Goldsrc games do you want?"
+                    echo "$LANG_GOLDSRCVERSION_TITLE"
                     echo
-                    echo "1) 25th Anniversary version"
-                    echo -e "${YELLOW}! Warning: Newer version, better for Xash3D-FWGS (new engine)${RESET}"
-                    echo "2) Pre-25th Anniversary version"
-                    echo -e "${YELLOW}! Warning: Older version, better for Xash3D-FWGS (old engine)${RESET}"
-                    echo "3) Both"
-                    echo -e "${RED}b) Back${RESET}"
+                    echo "1) $LANG_GOLDSRCVERSION_OPTION_25TH"
+                    echo -e "${YELLOW}$LANG_WARNING_NEW_VERSION${RESET}"
+                    echo "2) $LANG_GOLDSRCVERSION_OPTION_PRE25TH"
+                    echo -e "${YELLOW}$LANG_WARNING_OLD_VERSION${RESET}"
+                    echo "3) $LANG_OPTION_BOTH"
+                    echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
                     echo "============================"
-                    read -p "Choose an option (1-3): " manual_version
+                    read -p "$LANG_PROMPT_CHOOSE" manual_version
 
                     if [[ "$manual_version" == "b" ]]; then
                         back_to_main=true
@@ -208,7 +233,7 @@ while true; do
             fi
 
             if [[ "${#commands[@]}" -eq 0 ]]; then
-                echo -e "${RED}No games selected. Returning to main menu...${RESET}"
+                echo -e "${RED}$LANG_NO_GAMES${RESET}"
                 sleep 2
                 back_to_main=true
                 break
@@ -222,21 +247,21 @@ while true; do
         fi
 
     else
-        echo "Invalid option."
+        echo "${RED}$LANG_INVALID_OPTION${RESET}"
         sleep 2
         continue
     fi
 
     if [[ "${#commands[@]}" -eq 0 ]]; then
-        echo -e "${RED}No commands selected. Returning to main menu...${RESET}"
+        echo -e "${RED}$LANG_NO_COMMANDS${RESET}"
         sleep 2
         continue
     fi
 
     # Request for login
     echo
-    read -p "Enter your Steam username: " username
-    echo -n "Enter your Steam password: "
+    read -p "$LANG_ENTER_USERNAME" username
+    echo -n "$LANG_ENTER_PASSWORD"
     password=""
     while IFS= read -r -s -n1 char; do
         if [[ -z "$char" ]]; then
@@ -258,10 +283,10 @@ while true; do
     for args in "${commands[@]}"; do
         echo -e "${BOLD}Running:${RESET} $base_command $args"
         eval "$base_command $args" || {
-            echo -e "${RED}Failed to run the command above.${RESET}"
+            echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"
             exit 1
         }
     done
 
-    read -p "Press ENTER to return to the main menu..." _
+    read -p "$LANG_PRESS_ENTER" _
 done
