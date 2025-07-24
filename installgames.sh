@@ -182,7 +182,7 @@ while true; do
                     echo "3) $LANG_OPTION_BOTH"
                     echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
                     echo "============================"
-                    read -p "$LANG_PROMPT_CHOOSE" " manual_version
+                    read -p "$LANG_PROMPT_CHOOSE" manual_version
 
                     if [[ "$manual_version" == "b" ]]; then
                         back_to_main=true
