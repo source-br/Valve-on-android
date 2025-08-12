@@ -15,8 +15,9 @@ while true; do
     echo -e "Select language:"
     echo -e "1) English"
     echo -e "2) Português (Brasil)"
+    echo -e "3) Русский (Russian)"
     echo -e "============================"
-    read -p "Choice (1-2): " lang_option
+    read -p "Choice (1-3): " lang_option
 
     case "$lang_option" in
         1)
@@ -25,6 +26,10 @@ while true; do
             ;;
         2)
             source brazilian.sh
+            break
+            ;;
+        3)
+            source russian.sh
             break
             ;;
         *)
