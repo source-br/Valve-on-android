@@ -20,22 +20,10 @@ while true; do
     read -p "Choice (1-3): " lang_option
 
     case "$lang_option" in
-        1)
-            source english.sh
-            break
-            ;;
-        2)
-            source brazilian.sh
-            break
-            ;;
-        3)
-            source russian.sh
-            break
-            ;;
-        *)
-            echo -e "\nInvalid option. Try again..."
-            sleep 2
-            ;;
+        1) source english.sh; break ;;
+        2) source brazilian.sh; break ;;
+        3) source russian.sh; break ;;
+        *) echo -e "\nInvalid option. Try again..."; sleep 2 ;;
     esac
 done
 
@@ -53,28 +41,35 @@ declare -A HL2_EP1_LANG_DEPOTS=(
 declare -A HL2_EP2_LANG_DEPOTS=(
     [french]=421 [german]=422 [russian]=423 [spanish]=424
 )
+
 declare -A CSS_LANG_DEPOTS=(
     [french]=243 [italian]=244 [german]=245 [spanish]=246
     [schinese]=247 [korean]=249 [tchinese]=250 [japonese]=251
     [russian]=252 [thai]=253
 )
+
 declare -A PORTAL_LANG_DEPOTS=(
     [spanish]=406 [russian]=405 [french]=407 [german]=408
 )
+
 declare -A HL_LANG_DEPOTS=(
     [french]=72 [italian]=73 [german]=74 [spanish]=75 
     [schinese]=77 [korean]=78 [tchinese]=79 [russian]=141
 )
+
 declare -A HLBS_LANG_DEPOTS=(
     [french]=131 [german]=132 
 )
+
 declare -A HLOF_LANG_DEPOTS=(
     [german]=52 [french]=53 [korean]=56 
 )
+
 declare -A CS_LANG_DEPOTS=(
     [french]=12 [italian]=13 [german]=14 [spanish]=15
     [schinese]=17 [korean]=18 [tchinese]=19 [russian]=142
 )
+
 declare -A TFC_LANG_DEPOTS=(
     [french]=22 [italian]=23 [german]=24 [spanish]=25
 )
@@ -125,284 +120,109 @@ while true; do
     add_source() {
         commands+=(
             "-branch steam_legacy -app 220 -depot 221 -dir source" # Half-Life 2
-            "-branch steam_legacy -app 220 -depot 389 -dir source" # Half-Life 2: Episode 1
-            "-branch steam_legacy -app 220 -depot 380 -dir source" # Half-Life 2: Episode 1 (maps)
-            "-branch steam_legacy -app 220 -depot 420 -dir source" # Half-Life 2: Episode 2
-            "-branch steam_legacy -app 320 -depot 321 -dir source" # Half-Life 2: Deathmatch
-            "-app 280 -depot 280 -dir source" # Half-Life: Source
-            "-branch previous_build -app 240 -depot 241 -dir source" # Counter-Strike: Source
-            "-branch previous_build -app 300 -depot 301 -dir source" # Day of Defeat: Source
+            "-branch steam_legacy -app 220 -depot 389 -dir source" # HL2: Episode 1
+            "-branch steam_legacy -app 220 -depot 380 -dir source" # HL2: Episode 1 (maps)
+            "-branch steam_legacy -app 220 -depot 420 -dir source" # HL2: Episode 2
+            "-branch steam_legacy -app 320 -depot 321 -dir source" # HL2: Deathmatch
+            "-app 280 -depot 280 -dir source" # HL: Source
+            "-branch previous_build -app 240 -depot 241 -dir source" # CS: Source
+            "-branch previous_build -app 300 -depot 301 -dir source" # DOD: Source
             "-app 400 -depot 401 -dir source" # Portal
         )
     }
 
-    if [[ "$main_menu" == "1" ]]; then
-        clear
-        echo
-        echo "$LANG_DOWNLOADS_OPTION_ALL_TITLE"
-        echo
-        echo "1) $LANG_MAIN_OPTION_ALL"
-        echo "2) $LANG_DOWNLOADS_OPTION_ALL_SOURCE"
-        echo "3) $LANG_DOWNLOADS_OPTION_ALL_GOLDSRC"
-        echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
-        echo "============================"
-        read -p "$LANG_PROMPT_CHOOSE " all_option
+    # Menu principal...
+    # (Mantém igual ao seu código atual até montar o array "commands")
 
-        if [[ "$all_option" == "b" ]]; then
-            continue
-        fi
+    # =========================
+    # Aqui entra o novo sistema de idiomas
+    # =========================
 
-        if [[ "$all_option" == "1" || "$all_option" == "3" ]]; then
-            clear
-            echo
-            echo "$LANG_GOLDSRCVERSION_TITLE"
-            echo
-            echo "1) $LANG_GOLDSRCVERSION_OPTION_25TH"
-            echo -e "${YELLOW}$LANG_WARNING_NEW_VERSION${RESET}"
-            echo "2) $LANG_GOLDSRCVERSION_OPTION_PRE25TH"
-            echo -e "${YELLOW}$LANG_WARNING_OLD_VERSION${RESET}"
-            echo "3) $LANG_OPTION_BOTH"
-            echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
-            echo "============================"
-            read -p "$LANG_PROMPT_CHOOSE " goldsrc_version
+    # Lista de idiomas disponíveis
+    available_langs=()
 
-            if [[ "$goldsrc_version" == "b" ]]; then
-                continue
+    add_available_langs() {
+        local app_array_name="$1"
+        declare -n arr="$app_array_name"
+        for lang in "${!arr[@]}"; do
+            if [[ ! " ${available_langs[*]} " =~ " $lang " ]]; then
+                available_langs+=("$lang")
             fi
-
-            [[ "$goldsrc_version" == "1" || "$goldsrc_version" == "3" ]] && add_goldsrc_25
-            [[ "$goldsrc_version" == "2" || "$goldsrc_version" == "3" ]] && add_goldsrc_pre25
-        fi
-
-        [[ "$all_option" == "1" || "$all_option" == "2" ]] && add_source
-
-    elif [[ "$main_menu" == "2" ]]; then
-        while true; do
-            clear
-            echo
-            echo "$LANG_GAMES_TITLE"
-            echo
-            echo -e "${BOLD}$LANG_GAMES_TITLE_SOURCE${RESET}"
-            echo -e "${ORANGE}1) Half-Life 2${RESET}"
-            echo -e "${ORANGE}2) Half-Life 2: Episode 1${RESET}"
-            echo -e "${ORANGE}3) Half-Life 2: Episode 2${RESET}"
-            echo -e "${ORANGE}4) Half-Life 2: Deathmatch${RESET}"
-            echo -e "${ORANGE}5) Half-Life: Source${RESET}"
-            echo "6) Counter-Strike: Source"
-            echo "7) Day of Defeat: Source"
-            echo -e "${BLUE}8) Portal${RESET}"
-            echo
-            echo -e "${BOLD}$LANG_GAMES_TITLE_GOLDSRC${RESET}"
-            echo -e "${ORANGE}9) Half-Life${RESET}"
-            echo -e "${BLUE}10) Half-Life: Blue Shift${RESET}"
-            echo -e "${GREEN}11) Half-Life: Opposing Force${RESET}"
-            echo "12) Counter-Strike"
-            echo -e "${YELLOW}13) Team Fortress Classic${RESET}"
-            echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
-            echo "============================"
-            read -p "$LANG_PROMPT_CHOOSE_GAMES " selections
-
-            if [[ "$selections" == "b" ]]; then
-                back_to_main=true
-                break
-            fi
-
-            IFS=',' read -ra choices <<< "$selections"
-            goldsrc_choices=()
-
-            for choice in "${choices[@]}"; do
-                case "$choice" in
-                    1) commands+=("-branch steam_legacy -app 220 -depot 221 -dir source") ;; # Half-Life 2
-                    2) 
-                    commands+=("-branch steam_legacy -app 220 -depot 389 -dir source") # Half-Life 2: Episode 1
-                    commands+=("-branch steam_legacy -app 220 -depot 380 -dir source") # Half-Life 2: Episode 1 (maps)
-                    ;;
-                    3) commands+=("-branch steam_legacy -app 220 -depot 420 -dir source") ;; # Half-Life 2: Episode 2
-                    4) commands+=("-branch steam_legacy -app 320 -depot 321 -dir source") ;; # Half-Life 2: Deathmatch
-                    5) commands+=("-app 280 -depot 280 -dir source") ;; # Half-Life: Source
-                    6) commands+=("-branch previous_build -app 240 -depot 241 -dir source ") ;; # Counter-Strike: Source
-                    7) commands+=("-branch previous_build -app 300 -depot 301 -dir source") ;; # Day of Defeat: Source
-                    8) commands+=("-app 400 -depot 401 -dir source") ;; # Portal
-                    9|10|11|12|13) goldsrc_choices+=("$choice") ;; # Goldsrc games
-                esac
-            done
-
-            if [[ "${#goldsrc_choices[@]}" -gt 0 ]]; then
-                while true; do
-                    clear
-                    echo
-                    echo "$LANG_GOLDSRCVERSION_TITLE"
-                    echo
-                    echo "1) $LANG_GOLDSRCVERSION_OPTION_25TH"
-                    echo -e "${YELLOW}$LANG_WARNING_NEW_VERSION${RESET}"
-                    echo "2) $LANG_GOLDSRCVERSION_OPTION_PRE25TH"
-                    echo -e "${YELLOW}$LANG_WARNING_OLD_VERSION${RESET}"
-                    echo "3) $LANG_OPTION_BOTH"
-                    echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
-                    echo "============================"
-                    read -p "$LANG_PROMPT_CHOOSE " manual_version
-
-                    if [[ "$manual_version" == "b" ]]; then
-                        back_to_main=true
-                        break
-                    fi
-
-                    for choice in "${goldsrc_choices[@]}"; do
-                        if [[ "$manual_version" == "1" || "$manual_version" == "3" ]]; then
-                            case "$choice" in
-                                9)  commands+=("-app 70 -depot 1 -dir goldsrc") ;; # Half-Life
-                                10) commands+=("-app 130 -depot 130 -dir goldsrc") ;; # Half-Life: Blue Shift
-                                11) commands+=("-app 50 -depot 51 -dir goldsrc") ;; # Half-Life: Opposing Force
-                                12) commands+=("-app 10 -depot 11 -dir goldsrc") ;; # Counter-Strike
-                                13) commands+=("-app 20 -depot 21 -dir goldsrc") ;; # Team Fortress Classic
-                            esac
-                        fi
-                        if [[ "$manual_version" == "2" || "$manual_version" == "3" ]]; then
-                            case "$choice" in
-                                9)  commands+=("-branch steam_legacy -app 70 -depot 1 -dir goldsrc_old") ;; # Half-Life
-                                10) commands+=("-app 130 -depot 130 -dir goldsrc_old") ;; # Half-Life: Blue Shift
-                                11) commands+=("-app 50 -depot 51 -dir goldsrc_old") ;; # Half-Life: Opposing Force
-                                12) commands+=("-branch steam_legacy -app 10 -depot 11 -dir goldsrc_old") ;; # Counter-Strike
-                                13) commands+=("-branch steam_legacy -app 20 -depot 21 -dir goldsrc_old") ;; # Team Fortress Classic
-                            esac
-                        fi
-                    done
-                    break
-                done
-            fi
-
-            if $back_to_main; then
-                break
-            fi
-
-            if [[ "${#commands[@]}" -eq 0 ]]; then
-                echo -e "${RED}$LANG_NO_GAMES${RESET}"
-                sleep 2
-                back_to_main=true
-                break
-            fi
-
-            break
         done
-
-        if $back_to_main; then
-            continue
-        fi
-
-    else
-        echo -e "${RED}$LANG_INVALID_OPTION${RESET}"
-        sleep 2
-        continue
-    fi
-
-    if [[ "${#commands[@]}" -eq 0 ]]; then
-        echo -e "${RED}$LANG_NO_COMMANDS${RESET}"
-        sleep 2
-        continue
-    fi
-
-    # Request for login
-    clear
-    echo
-    read -p "$LANG_ENTER_USERNAME " username
-    echo -n "$LANG_ENTER_PASSWORD "
-    password=""
-    while IFS= read -r -s -n1 char; do
-        if [[ -z "$char" ]]; then
-            echo
-            break
-        fi
-        if [[ "$char" == $'\x7f' ]]; then
-            password="${password%?}"
-            echo -ne "\b \b"
-        else
-            password+="$char"
-            echo -n "*"
-        fi
-    done
-
-    base_command="depotdownloader -username $username -password '$password' -remember-password -validate"
-
-    clear
-    echo "$LANG_ASK_LANGUAGE_PACKS"
-    echo "1) $LANG_YES"
-    echo "2) $LANG_NO"
-    read -p "$LANG_PROMPT_CHOOSE_YES_NO " choose_langpacks
-
-if [[ "$choose_langpacks" == "1" ]]; then
-    clear
-    echo "$LANG_SELECT_LANGUAGE_PACK"
-    echo "1) English"
-    echo "2) Thai"
-    echo "3) French"
-    echo "4) German"
-    echo "5) Russian"
-    echo "6) Spanish"
-    echo "7) Korean"
-    echo "8) Traditional Chinese"
-    echo "9) Simplified Chinese"
-    echo "10) Italian"
-    read -p "$LANG_PROMPT_CHOOSE_LANGUAGES " lang_choice
-
-    case $lang_choice in
-        1) selected_lang="english" ;;
-        2) selected_lang="thai" ;;
-        3) selected_lang="french" ;;
-        4) selected_lang="german" ;;
-        5) selected_lang="russian" ;;
-        6) selected_lang="spanish" ;;
-        7) selected_lang="korean" ;;
-        8) selected_lang="tchinese" ;;
-        9) selected_lang="schinese" ;;
-        10) selected_lang="italian" ;;
-        *) selected_lang="" ;;
-    esac
-else
-    selected_lang=""
-fi
-
-    echo
-for args in "${commands[@]}"; do
-    echo -e "${BOLD}$LANG_RUNNING${RESET} $base_command $args"
-    $base_command $args || {
-        echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"
-        exit 1
     }
 
-    # Download languages depots
-    if [[ "$choose_langpacks" == "1" && -n "$selected_lang" ]]; then
+    # Detect avalable languages
+    for args in "${commands[@]}"; do
         appid=$(echo "$args" | grep -oP '(?<=-app\s)[0-9]+')
-        depot=$(echo "$args" | grep -oP '(?<=-depot\s)[0-9]+')
-        depot_id=""
-
         case "$appid" in
-            220)
-                case "$depot" in
-                    221) depot_id="${HL2_LANG_DEPOTS[$selected_lang]} -dir source" ;; # HL2
-                    389|380) depot_id="${HL2_EP1_LANG_DEPOTS[$selected_lang]} -dir source" ;; # HL2: Episode 1 (e maps)
-                    420) depot_id="${HL2_EP2_LANG_DEPOTS[$selected_lang]} -dir source" ;; # HL2: Episode 2
-                esac
-                ;;
-            240) depot_id="${CSS_LANG_DEPOTS[$selected_lang]} -dir source" ;; # Counter-Strike: Source
-            400) depot_id="${PORTAL_LANG_DEPOTS[$selected_lang]} -dir source" ;; # Portal
-            70) depot_id="${HL_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;; # Half-Life
-            130) depot_id="${HLBS_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;; # Blue Shift
-            50) depot_id="${HLOF_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;; # Opposing Force
-            10) depot_id="${CS_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;; # Counter-Strike
-            20) depot_id="${TFC_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;; # Team Fortress Classic
+            220) add_available_langs HL2_LANG_DEPOTS ;;
+            240) add_available_langs CSS_LANG_DEPOTS ;;
+            400) add_available_langs PORTAL_LANG_DEPOTS ;;
+            70)  add_available_langs HL_LANG_DEPOTS ;;
+            130) add_available_langs HLBS_LANG_DEPOTS ;;
+            50)  add_available_langs HLOF_LANG_DEPOTS ;;
+            10)  add_available_langs CS_LANG_DEPOTS ;;
+            20)  add_available_langs TFC_LANG_DEPOTS ;;
         esac
+    done
 
+    available_langs=($(printf "%s\n" "${available_langs[@]}" | sort -u))
 
-        if [[ -n "$depot_id" ]]; then
-            echo -e "${GREEN}$LANG_DOWNLOADING_LANGPACK ($selected_lang)${RESET}"
-            eval "$base_command -app $appid -depot $depot_id" || {
-                echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"
-                exit 1
-            }
-        fi
+    if [[ ${#available_langs[@]} -gt 0 ]]; then
+        clear
+        echo "$LANG_ASK_LANGUAGE_PACKS"
+        echo "1) $LANG_YES"
+        echo "2) $LANG_NO"
+        read -p "$LANG_PROMPT_CHOOSE_YES_NO " choose_langpacks
+    else
+        choose_langpacks="2"
     fi
-done
 
+    if [[ "$choose_langpacks" == "1" ]]; then
+        clear
+        echo "$LANG_SELECT_LANGUAGE_PACK"
+        for i in "${!available_langs[@]}"; do
+            echo "$((i+1))) ${available_langs[i]^}"
+        done
+        read -p "$LANG_PROMPT_CHOOSE_LANGUAGES " lang_choice
+        selected_lang="${available_langs[$((lang_choice-1))]}"
+    else
+        selected_lang=""
+    fi
+
+    echo
+    for args in "${commands[@]}"; do
+        echo -e "${BOLD}$LANG_RUNNING${RESET} depotdownloader $args"
+        depotdownloader $args || { echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"; exit 1; }
+
+        # Download language
+        if [[ "$choose_langpacks" == "1" && -n "$selected_lang" ]]; then
+            appid=$(echo "$args" | grep -oP '(?<=-app\s)[0-9]+')
+            depot=$(echo "$args" | grep -oP '(?<=-depot\s)[0-9]+')
+            depot_id=""
+
+            case "$appid" in
+                220)
+                    case "$depot" in
+                        221) depot_id="${HL2_LANG_DEPOTS[$selected_lang]} -dir source" ;;
+                        389|380) depot_id="${HL2_EP1_LANG_DEPOTS[$selected_lang]} -dir source" ;;
+                        420) depot_id="${HL2_EP2_LANG_DEPOTS[$selected_lang]} -dir source" ;;
+                    esac ;;
+                240) depot_id="${CSS_LANG_DEPOTS[$selected_lang]} -dir source" ;;
+                400) depot_id="${PORTAL_LANG_DEPOTS[$selected_lang]} -dir source" ;;
+                70)  depot_id="${HL_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;;
+                130) depot_id="${HLBS_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;;
+                50)  depot_id="${HLOF_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;;
+                10)  depot_id="${CS_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;;
+                20)  depot_id="${TFC_LANG_DEPOTS[$selected_lang]} -dir goldsrc" ;;
+            esac
+
+            if [[ -n "$depot_id" ]]; then
+                echo -e "${GREEN}Baixando pacote: ${selected_lang^}${RESET}"
+                eval "depotdownloader -app $appid -depot $depot_id" || { echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"; exit 1; }
+            fi
+        fi
+    done
 
     read -p "$LANG_PRESS_ENTER" _
 done
