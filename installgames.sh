@@ -47,6 +47,10 @@ load_language_script() {
             load_language_script "russian.sh" "https://raw.githubusercontent.com/source-br/Valve-on-android/main/russian.sh"
             break
             ;;
+        3)
+            source russian.sh
+            break
+            ;;
         *)
             echo -e "\nInvalid option. Try again..."
             sleep 2
