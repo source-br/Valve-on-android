@@ -438,7 +438,8 @@ while true; do
 				read -p "$LANG_PROMPT_CHOOSE (1-$((i-1))): " lang_choice
 
 				if [[ "$lang_choice" == "b" ]]; then
-					continue
+					back_to_main=true
+					break 
 				elif [[ "$lang_choice" =~ ^[0-9]+$ ]] && (( lang_choice >= 1 && lang_choice <= i-1 )); then
 					selected_lang="${lang_menu[$lang_choice]}"
 					break
@@ -460,9 +461,8 @@ while true; do
 	done
 
 	if $back_to_main; then
-		continue  
+		continue  # volta para o menu inicial, sem fechar o programa
 	fi
-
 
     # Login
     clear
