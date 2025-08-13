@@ -13,26 +13,35 @@ RED="\033[31m"
 load_language_script() {
     local lang_file_local="$1"
     local lang_file_url="$2"
+    local temp_file="$PWD/lang_temp.sh"
 
-    if [[ -f "$lang_file_local" ]]; then
-        # If the local file exists, use it.
+    # If the local file exists and is not empty, source it
+    if [[ -s "$lang_file_local" ]]; then
         source "$lang_file_local"
-    else
-        # Otherwise, download and load in the same shell
-        curl -sSL "$lang_file_url" -o /tmp/lang_temp.sh
-        source /tmp/lang_temp.sh
+        return 0
     fi
+
+    # Otherwise, download the language file
+    curl -sSL "$lang_file_url" -o "$temp_file" || return 1
+
+    # Check if the downloaded file is not empty
+    [[ -s "$temp_file" ]] || return 1
+
+    # Source the downloaded file
+    source "$temp_file"
+    return 0
 }
 
 # Language
 while true; do
     clear
-    echo -e "Select language:"
+	echo
+    echo "Select language:"
     echo
-    echo -e "1) English"
-    echo -e "2) Português (Brasil)"
-    echo -e "3) Русский"
-    echo -e "============================"
+    echo "1) English"
+    echo "2) Português (Brasil)"
+    echo "3) Русский"
+    echo "============================"
     read -p "Choice (1-3): " lang_option
 
     case "$lang_option" in
@@ -48,12 +57,17 @@ while true; do
             load_language_script "russian.sh" "https://raw.githubusercontent.com/source-br/Valve-on-android/main/russian.sh"
             break
             ;;
+        b|B)
+            echo "Returning..."
+            exit 0
+            ;;
         *)
             echo -e "\nInvalid option. Try again..."
             sleep 2
             ;;
     esac
 done
+
 
 # Langs Depots
 # Language depots for each game
