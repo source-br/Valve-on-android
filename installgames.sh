@@ -40,7 +40,7 @@ while true; do
     echo
     echo "1) English"
     echo "2) Português (Brasil)"
-    echo "3) Русский"
+    echo "3) Русский (Russian)"
     echo "============================"
     read -p "Choice (1-3): " lang_option
 
@@ -126,6 +126,15 @@ declare -A lang_display_names=(
 # Check if depotdownloader is installed
 if ! command -v depotdownloader >/dev/null 2>&1; then
     echo -e "${RED}$LANG_ERROR:${RESET} $LANG_DEPOT"
+	echo "Script will attempt to install TermuxDepotDownloader in 5 seconds..."
+ 	sleep 5
+  	echo -e "installing depotdownloader..."
+   	sleep 3
+	curl -LO "https://raw.githubusercontent.com/TheKingFireS/TermuxDepotDownloader/alpine/installproot.sh"
+	chmod +x installproot.sh
+	./installproot.sh
+ 	echo -e "depotdownloader is successfuly installed"
+  	#sleep 3
     exit 1
 fi
 
