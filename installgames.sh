@@ -487,6 +487,7 @@ while true; do
         depot=$(echo "$args" | awk '{for(i=1;i<=NF;i++) if($i=="-depot") print $(i+1)}')
         game_name=$(get_game_name "$appid" "$depot")
 
+        clear
         echo -e "${BOLD}${GREEN}$LANG_DOWNLOADING${RESET} $game_name"
         eval "$base_command $args" || {
             echo -e "${RED}Error executing the command above.${RESET}"
