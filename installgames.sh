@@ -15,11 +15,12 @@ load_language_script() {
     local lang_file_url="$2"
 
     if [[ -f "$lang_file_local" ]]; then
-        # Se o arquivo local existir, usa ele
+        # If the local file exists, use it.
         source "$lang_file_local"
     else
-        # Caso contrário, baixa e executa
-        curl -sSL "$lang_file_url" | bash
+        # Otherwise, download and load in the same shell
+        curl -sSL "$lang_file_url" -o /tmp/lang_temp.sh
+        source /tmp/lang_temp.sh
     fi
 }
 
