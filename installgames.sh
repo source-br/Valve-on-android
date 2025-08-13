@@ -9,8 +9,21 @@ BLUE="\033[34m"
 GREEN="\033[32m"
 RED="\033[31m"
 
+# Function to load the language script
+load_language_script() {
+    local lang_file_local="$1"
+    local lang_file_url="$2"
+
+    if [[ -f "$lang_file_local" ]]; then
+        # Se o arquivo local existir, usa ele
+        source "$lang_file_local"
+    else
+        # Caso contrário, baixa e executa
+        curl -sSL "$lang_file_url" | bash
+    fi
+}
+
 # Language
-# Loop to select the language
 while true; do
     clear
     echo -e "Select language:"
@@ -20,19 +33,6 @@ while true; do
     echo -e "3) Русский"
     echo -e "============================"
     read -p "Choice (1-3): " lang_option
-
-load_language_script() {
-    local lang_file_local="$1"
-    local lang_file_url="$2"
-
-    if [[ -f "$lang_file_local" ]]; then
-        # If the local file exists, use it
-        source "$lang_file_local"
-    else
-        # If it doesn't exist, download and execute it from the internet
-        curl -sSL "$lang_file_url" | bash
-    fi
-}
 
     case "$lang_option" in
         1)
@@ -47,16 +47,11 @@ load_language_script() {
             load_language_script "russian.sh" "https://raw.githubusercontent.com/source-br/Valve-on-android/main/russian.sh"
             break
             ;;
-        3)
-            source russian.sh
-            break
-            ;;
         *)
             echo -e "\nInvalid option. Try again..."
             sleep 2
             ;;
     esac
-
 done
 
 # Langs Depots
