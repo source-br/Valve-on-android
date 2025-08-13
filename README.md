@@ -18,9 +18,7 @@ This tool will require installed TermuxDepotDownloader on your Termux, you can d
 
 Copy and paste this text in Termux to setup this repository:
 ```
-curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/installgames.sh" && curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/english.sh" && curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/brazilian.sh"
-chmod +x installgames.sh
-./installgames.sh
+curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/installgames.sh" && chmod +x installgames.sh && ./installgames.sh
 ```
 
 <img width="2382" height="945" alt="1000183744" src="https://github.com/user-attachments/assets/9d7d1c9e-9b08-45ff-ac71-1170e0e7ba20" />
