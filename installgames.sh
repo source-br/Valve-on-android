@@ -134,8 +134,8 @@ if ! command -v depotdownloader >/dev/null 2>&1; then
 	chmod +x installproot.sh
 	./installproot.sh
  	echo -e "depotdownloader is successfuly installed"
-  	#sleep 3
-    exit 1
+  	sleep 3
+    sh installgames.sh
 fi
 
 # Main loop
