@@ -7,7 +7,7 @@
 </div>
 <div align="right">
     <a href="Docs/Readmes/Russian.md" target="_blank">
-        <img src="Docs/img/readme/flag_ru.png" height="25" width="25">
+        <img src="Docs/img/readme/russian.png" height="25" width="25">
     </a>
 </div>
 
