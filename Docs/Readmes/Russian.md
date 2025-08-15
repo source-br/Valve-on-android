@@ -2,12 +2,12 @@
 
 <div align="right">
     <a href="Brazilian.md" target="_blank">
-        <img src="Docs/img/readme/flag_br.png" height="25" width="25">
+        <img src="../img/readme/flag_br.png" height="25" width="25">
     </a>
 </div>
 <div align="right">
     <a href="../../README.md" target="_blank">
-        <img src="../img/readme/flag_e.png" height="25" width="25">
+        <img src="../img/readme/flag_eua.png" height="25" width="25">
     </a>
 </div>
 
