@@ -188,7 +188,7 @@ while true; do
     read -p "$LANG_PROMPT_CHOOSE (1-3): " main_menu
 
     if [[ "$main_menu" == "3" ]]; then
-        echo -e "${RED}$LANG_EXITING${RESET}"
+        echo -e "${RED}[!] $LANG_EXITING${RESET}"
         exit 0
     fi
 
@@ -429,7 +429,7 @@ while true; do
         echo
         echo "1) $LANG_YES"
         echo "2) $LANG_NO"
-		echo
+		    echo
         echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
         echo "============================"
         read -p "$LANG_PROMPT_CHOOSE (1-2): " choose_langpacks
@@ -493,7 +493,7 @@ while true; do
                                 lang_menu[$i]=$lang
                                 ((i++))
                             done
-							echo
+							              echo
                             echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
                             echo "============================"
                             read -p "$LANG_PROMPT_CHOOSE (1-$((i-1))): " lang_choice
@@ -550,7 +550,7 @@ while true; do
                                 community_menu[$i]=$lang_code
                                 ((i++))
                             done
-							echo
+							              echo
                             echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
                             echo "============================"
                             read -p "$LANG_PROMPT_CHOOSE (1-$((i-1))): " lang_choice
@@ -622,7 +622,7 @@ while true; do
         clear
         echo -e "${BOLD}${GREEN}$LANG_DOWNLOADING${RESET} $game_name"
         eval "$base_command $args" || {
-            echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"
+            echo -e "${RED}[!] $LANG_COMMANDS_ABOVE${RESET}"
             exit 1
         }
 
