@@ -13,22 +13,23 @@ LANG_DOWNLOADS_OPTION_ALL_GOLDSRC="Все Goldsrc игры"
 # Manual
 LANG_GAMES_TITLE_SOURCE="Source игры:"
 LANG_GAMES_TITLE_GOLDSRC="Goldsrc игры:"
-LANG_PROMPT_CHOOSE_GAMES="Выберите одну или больше опций, разделенные запятыми, например:1,3"
+LANG_PROMPT_CHOOSE_MORE="Выберите одну или больше опций, разделенные запятыми, например:1,3"
 
 # Goldsrc
 LANG_GOLDSRCVERSION_TITLE="Which version of the Goldsrc games do you want?"
-LANG_GOLDSRCVERSION_OPTION_25TH="25th Anniversary version"
-LANG_WARNING_NEW_VERSION="! Внимание: Новая версия, лучше для Xash3D-FWGS (Новый движок)"
+LANG_GOLDSRCVERSION_OPTION_25TH="Latest version"
 LANG_GOLDSRCVERSION_OPTION_PRE25TH="Pre-25th Anniversary version"
-LANG_WARNING_OLD_VERSION="! Внимание: Старая версия, лучше для Xash3D-FWGS (Старый движок)"
+LANG_WARNING_OLD_VERSION="[!] Внимание: Старая версия, лучше для Xash3D-FWGS (Старый движок)"
 
 # Select languages
 LANG_ASK_LANGUAGE_PACKS="Do you want to download additional language packs?"
 LANG_SELECT_LANGUAGE_PACK="Select the language pack you want to include:"
+LANG_SELECT_COMMUNITY_LANGUAGE="What type of translation pack?"
 
 # Languages
 LANG_ENGLISH="English (English)"
-LANG_SPANISH="Español (Spanish)"
+LANG_SPANISH_E="Español España (Spanish Spain)"
+LANG_SPANISH_L="Español Latinoamérica (Spanish Latin America)" 
 LANG_THAI="ไทย (Thai)"
 LANG_FRENCH="Français (French)"
 LANG_GERMAN="Deutsch (German)"
@@ -38,6 +39,10 @@ LANG_TCHINESE="繁體中文 (Traditional Chinese)"
 LANG_SCHINESE="简体中文 (Simplified Chinese)"
 LANG_ITALIAN="Italiano (Italian)"
 LANG_JAPANESE="日本語 (Japanese)"
+LANG_PORTUGUESE_BRAZIL="Português Brasil (Portuguese Brazil)"
+LANG_TRANSLATION_TYPE="Which source do you want to download the language packs from?"
+LANG_TRANSLATION_OFFICIAL="Official"
+LANG_TRANSLATION_COMMUNITY="Community"
 
 # Login
 LANG_ENTER_USERNAME="Напишите ваш Steam юзернейм:"
@@ -63,3 +68,6 @@ LANG_NO_COMMANDS="Команды не выбраны. Возращаемся в 
 LANG_COMMANDS_ABOVE="Не удалось запустить команду выше."
 LANG_NO_GAMES="Игры не выбранны. Возращаемся в главное меню..."
 LANG_DOWNLOADING_LANG_PACK="Downloading language pack:"
+LANG_BY_SRBR_MPD="${BLUE}[${RESET}${GREEN}*${RESET}${BLUE}]${RESET} By ${GREEN}Source BR${RESET} and Mesa Preta Dubs"
+LANG_FAILED_DOWNLOAD="Failed to download :("
+LANG_SUCCESS_DOWNLOAD="Downloaded successfully :)"
