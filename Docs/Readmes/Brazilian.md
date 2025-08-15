@@ -4,8 +4,6 @@
     <a href="../../README.md" target="_blank">
         <img src="../img/readme/flag_eua.png" height="25" width="25">
     </a>
-</div>
-<div align="right">
     <a href="Russian.md" target="_blank">
         <img src="../img/readme/russian.png" height="25" width="25">
     </a>
