@@ -132,22 +132,22 @@ declare -A COMMUNITY_OUTDIRS
 # Half-Life 2 (HL2 base: app 220 depot 221)
 # COMMUNITY_URLS["220:221,pt-BR"]=""
 # COMMUNITY_OUTFILES["220:221,pt-BR"]="HL2_Brazilian.7z"
-# COMMUNITY_OUTDIRS["220:221,pt-BR"]="~/storage/downloads/depotdownloaded/source"
+# COMMUNITY_OUTDIRS["220:221,pt-BR"]="~/~/storage/srceng"
 
 # HL2 Episode One (app 220 depot 389/380)
 # COMMUNITY_URLS["220:389,pt-BR"]=""
 # COMMUNITY_OUTFILES["220:389,pt-BR"]="HL2_EP1_Brazilian.7z"
-# COMMUNITY_OUTDIRS["220:389,pt-BR"]="~/storage/downloads/depotdownloaded/source"
+# COMMUNITY_OUTDIRS["220:389,pt-BR"]="~/~/storage/srceng"
 
 # HL2 Episode Two (app 220 depot 420)
 # COMMUNITY_URLS["220:420,pt-BR"]=""
 # COMMUNITY_OUTFILES["220:420,pt-BR"]="HL2_EP2_Brazilian.7z"
-# COMMUNITY_OUTDIRS["220:420,pt-BR"]="~/storage/downloads/depotdownloaded/source"
+# COMMUNITY_OUTDIRS["220:420,pt-BR"]="~/storage/srceng"
 
 # Half-Life 1 (app 70, depot 1 new)
 COMMUNITY_URLS["70:1,pt-BR"]="https://github.com/source-br/Xash3D-pt-br/releases/download/1.0/Half.life.1.7z"
 COMMUNITY_OUTFILES["70:1,pt-BR"]="valve_brazilian.7z"
-COMMUNITY_OUTDIRS["70:1,pt-BR"]="~/storage/downloads/depotdownloaded/goldsrc"
+COMMUNITY_OUTDIRS["70:1,pt-BR"]="~/storage/xash"
 
 
 
@@ -156,12 +156,12 @@ COMMUNITY_OUTDIRS["70:1,pt-BR"]="~/storage/downloads/depotdownloaded/goldsrc"
 # ==========================================
 if ! command -v depotdownloader >/dev/null 2>&1; then
     clear
-    echo -e "${RED}[!] $LANG_ERROR:${RESET} $LANG_DEPOT"
+    echo -e "${RED}[!] $LANG_ERROR${RESET} $LANG_DEPOT"
     echo -e "$LANG_INSTALL_DEPOT"
     sleep 5
     echo -e "${BOLD}${GREEN}$LANG_INSTALLING${RESET} depotdownloader"
     sleep 3
-    curl -LO "https://raw.githubusercontent.com/TheKingFireS/TermuxDepotDownloader/alpine/installproot.sh"
+    curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/Tools/installproot.sh"
     chmod +x installproot.sh
     ./installproot.sh
     echo -e "${BOLD}${GREEN}[*] depotdownloader $LANG_SUCCESS${RESET}"
@@ -188,7 +188,7 @@ while true; do
     read -p "$LANG_PROMPT_CHOOSE (1-3): " main_menu
 
     if [[ "$main_menu" == "3" ]]; then
-        echo -e "${RED}[!] $LANG_EXITING${RESET}"
+        echo -e "${RED}$LANG_EXITING${RESET}"
         exit 0
     fi
 
@@ -225,31 +225,31 @@ while true; do
     # --------------------------------------
     add_goldsrc_pre25() {
         commands+=(
-            "-branch steam_legacy -app 70  -depot 1   -dir goldsrc_old"
-            "-branch steam_legacy -app 10  -depot 11  -dir goldsrc_old"
-            "-branch steam_legacy -app 20  -depot 21  -dir goldsrc_old"
+            "-branch steam_legacy -app 70  -depot 1   -dir xash_old" # Half-Life old
+            "-branch steam_legacy -app 10  -depot 11  -dir xash_old" # Counter-Strike old
+            "-branch steam_legacy -app 20  -depot 21  -dir xash_old" # TFC old
         )
     }
     add_goldsrc_25() {
         commands+=(
-            "-app 70  -depot 1   -dir goldsrc"
-            "-app 130 -depot 130 -dir goldsrc"
-            "-app 50  -depot 51  -dir goldsrc"
-            "-app 10  -depot 11  -dir goldsrc"
-            "-app 20  -depot 21  -dir goldsrc"
+            "-app 70  -depot 1   -dir xash" # Half-Life
+            "-app 130 -depot 130 -dir xash" # Blue Shift
+            "-app 50  -depot 51  -dir xash" # Opposing Force
+            "-app 10  -depot 11  -dir xash" # Counter-Strike
+            "-app 20  -depot 21  -dir xash" # TFC
         )
     }
     add_source() {
         commands+=(
-            "-branch steam_legacy -app 220 -depot 221 -dir source"
-            "-branch steam_legacy -app 220 -depot 389 -dir source"
-            "-branch steam_legacy -app 220 -depot 380 -dir source"
-            "-branch steam_legacy -app 220 -depot 420 -dir source"
-            "-branch steam_legacy -app 320 -depot 321 -dir source"
-            "-app 280 -depot 280 -dir source"
-            "-branch previous_build -app 240 -depot 241 -dir source"
-            "-branch previous_build -app 300 -depot 301 -dir source"
-            "-app 400 -depot 401 -dir source"
+            "-branch steam_legacy -app 220 -depot 221 -dir srceng" # Half-Life 2
+            "-branch steam_legacy -app 220 -depot 389 -dir srceng" # EP1
+            "-branch steam_legacy -app 220 -depot 380 -dir srceng" # EP1 maps
+            "-branch steam_legacy -app 220 -depot 420 -dir srceng" # EP2
+            "-branch steam_legacy -app 320 -depot 321 -dir srceng" # HL2:DM
+            "-app 280 -depot 280 -dir srceng" # HL:S
+            "-branch previous_build -app 240 -depot 241 -dir srceng" # CSS
+            "-branch previous_build -app 300 -depot 301 -dir srceng" # DoD:S
+            "-app 400 -depot 401 -dir srceng"
         )
     }
 
@@ -334,14 +334,14 @@ while true; do
 
             for choice in "${choices[@]}"; do
                 case "$choice" in
-                    1) commands+=("-branch steam_legacy -app 220 -depot 221 -dir source") ;; # Half-Life 2
-                    2) commands+=("-branch steam_legacy -app 220 -depot 389 -dir source"); commands+=("-branch steam_legacy -app 220 -depot 380 -dir source") ;; # EP1
-                    3) commands+=("-branch steam_legacy -app 220 -depot 420 -dir source") ;; # EP2
-                    4) commands+=("-branch steam_legacy -app 320 -depot 321 -dir source") ;; # HL2:DM
-                    5) commands+=("-app 280 -depot 280 -dir source") ;; # HL:S
-                    6) commands+=("-branch previous_build -app 240 -depot 241 -dir source ") ;; # CSS
-                    7) commands+=("-branch previous_build -app 300 -depot 301 -dir source") ;; # DoD:S
-                    8) commands+=("-app 400 -depot 401 -dir source") ;; # Portal
+                    1) commands+=("-branch steam_legacy -app 220 -depot 221 -dir srceng") ;; # Half-Life 2
+                    2) commands+=("-branch steam_legacy -app 220 -depot 389 -dir srceng"); commands+=("-branch steam_legacy -app 220 -depot 380 -dir srceng") ;; # EP1
+                    3) commands+=("-branch steam_legacy -app 220 -depot 420 -dir srceng") ;; # EP2
+                    4) commands+=("-branch steam_legacy -app 320 -depot 321 -dir srceng") ;; # HL2:DM
+                    5) commands+=("-app 280 -depot 280 -dir srceng") ;; # HL:S
+                    6) commands+=("-branch previous_build -app 240 -depot 241 -dir srceng ") ;; # CSS
+                    7) commands+=("-branch previous_build -app 300 -depot 301 -dir srceng") ;; # DoD:S
+                    8) commands+=("-app 400 -depot 401 -dir srceng") ;; # Portal
                     9|10|11|12|13) goldsrc_choices+=("$choice") ;; # Goldsrc
                 esac
             done
@@ -369,20 +369,20 @@ while true; do
                     for choice in "${goldsrc_choices[@]}"; do
                         if [[ "$manual_version" == "1" || "$manual_version" == "3" ]]; then
                             case "$choice" in
-                                9)  commands+=("-app 70 -depot 1 -dir goldsrc") ;;
-                                10) commands+=("-app 130 -depot 130 -dir goldsrc") ;;
-                                11) commands+=("-app 50 -depot 51 -dir goldsrc") ;;
-                                12) commands+=("-app 10 -depot 11 -dir goldsrc") ;;
-                                13) commands+=("-app 20 -depot 21 -dir goldsrc") ;;
+                                9)  commands+=("-app 70 -depot 1 -dir xash") ;; # Half-Life
+                                10) commands+=("-app 130 -depot 130 -dir xash") ;; # Blue Shift
+                                11) commands+=("-app 50 -depot 51 -dir xash") ;; # Opposing Force
+                                12) commands+=("-app 10 -depot 11 -dir xash") ;; # Counter-Strike
+                                13) commands+=("-app 20 -depot 21 -dir xash") ;; # TFC
                             esac
                         fi
                         if [[ "$manual_version" == "2" || "$manual_version" == "3" ]]; then
                             case "$choice" in
-                                9)  commands+=("-branch steam_legacy -app 70 -depot 1 -dir goldsrc_old") ;;
-                                10) commands+=("-app 130 -depot 130 -dir goldsrc_old") ;;
-                                11) commands+=("-app 50 -depot 51 -dir goldsrc_old") ;;
-                                12) commands+=("-branch steam_legacy -app 10 -depot 11 -dir goldsrc_old") ;;
-                                13) commands+=("-branch steam_legacy -app 20 -depot 21 -dir goldsrc_old") ;;
+                                9)  commands+=("-branch steam_legacy -app 70 -depot 1 -dir xash_old") ;; # Half-Life old
+                                10) commands+=("-app 130 -depot 130 -dir xash_old") ;; # Blue Shift old
+                                11) commands+=("-app 50 -depot 51 -dir xash_old") ;; # Opposing Force old
+                                12) commands+=("-branch steam_legacy -app 10 -depot 11 -dir xash_old") ;; # Counter-Strike old
+                                13) commands+=("-branch steam_legacy -app 20 -depot 21 -dir xash_old") ;; # TFC old
                             esac
                         fi
                     done
@@ -632,23 +632,24 @@ while true; do
             case "$appid" in
                 220)
                     if [[ $depot == 221 ]]; then
-                        depot_id="${HL2_LANG_DEPOTS[$selected_official_lang]} -dir source"
+                        depot_id="${HL2_LANG_DEPOTS[$selected_official_lang]} -dir srceng"
                     elif [[ $depot == 389 || $depot == 380 ]]; then
-                        depot_id="${HL2_EP1_LANG_DEPOTS[$selected_official_lang]} -dir source"
+                        depot_id="${HL2_EP1_LANG_DEPOTS[$selected_official_lang]} -dir srceng"
                     elif [[ $depot == 420 ]]; then
-                        depot_id="${HL2_EP2_LANG_DEPOTS[$selected_official_lang]} -dir source"
+                        depot_id="${HL2_EP2_LANG_DEPOTS[$selected_official_lang]} -dir srceng"
                     fi
                     ;;
-                240) depot_id="${CSS_LANG_DEPOTS[$selected_official_lang]} -dir source" ;;
-                400) depot_id="${PORTAL_LANG_DEPOTS[$selected_official_lang]} -dir source" ;;
-                70)  depot_id="${HL_LANG_DEPOTS[$selected_official_lang]} -dir goldsrc" ;;
-                130) depot_id="${HLBS_LANG_DEPOTS[$selected_official_lang]} -dir goldsrc" ;;
-                50)  depot_id="${HLOF_LANG_DEPOTS[$selected_official_lang]} -dir goldsrc" ;;
-                10)  depot_id="${CS_LANG_DEPOTS[$selected_official_lang]} -dir goldsrc" ;;
-                20)  depot_id="${TFC_LANG_DEPOTS[$selected_official_lang]} -dir goldsrc" ;;
+                240) depot_id="${CSS_LANG_DEPOTS[$selected_official_lang]} -dir srceng" ;;
+                400) depot_id="${PORTAL_LANG_DEPOTS[$selected_official_lang]} -dir srceng" ;;
+                70)  depot_id="${HL_LANG_DEPOTS[$selected_official_lang]} -dir xash" ;;
+                130) depot_id="${HLBS_LANG_DEPOTS[$selected_official_lang]} -dir xash" ;;
+                50)  depot_id="${HLOF_LANG_DEPOTS[$selected_official_lang]} -dir xash" ;;
+                10)  depot_id="${CS_LANG_DEPOTS[$selected_official_lang]} -dir xash" ;;
+                20)  depot_id="${TFC_LANG_DEPOTS[$selected_official_lang]} -dir xash" ;;
             esac
             if [[ -n "$depot_id" ]]; then
                 echo -e "${BOLD}${GREEN}$LANG_DOWNLOADING_LANG_PACK${RESET} ${lang_display_names[$selected_official_lang]}"
+                export LANG_SUCCESS_DOWNLOAD
                 eval "$base_command -app $appid -depot $depot_id" || { echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"; exit 1; }
             fi
         fi
