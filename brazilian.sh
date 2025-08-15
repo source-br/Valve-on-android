@@ -25,6 +25,7 @@ LANG_WARNING_OLD_VERSION="! Atenção: Versão mais antiga, melhor para o Xash3D
 # Select languages
 LANG_ASK_LANGUAGE_PACKS="Deseja baixar pacotes de idioma adicionais?"
 LANG_SELECT_LANGUAGE_PACK="Selecione o pacote de idioma que deseja incluir:"
+LANG_SELECT_COMMUNITY_LANGUAGE="Qual tipo de pacote de tradução"
 
 # Languages
 LANG_ENGLISH="English (Inglês)"
@@ -38,6 +39,11 @@ LANG_TCHINESE="繁體中文 (Chinês Tradicional)"
 LANG_SCHINESE="简体中文 (Chinês Simplificado)"
 LANG_ITALIAN="Italiano (Italiano)"
 LANG_JAPANESE="日本語 (Japonês)"
+LANG_PORTUGUESE_BRAZIL="Português Brasil ${GREEN}@Mantido pela Source BR]${RESET}"
+
+LANG_TRANSLATION_TYPE="Qual tipo"
+LANG_TRANSLATION_OFFICIAL="Oficial"
+LANG_TRANSLATION_COMMUNITY="Cumunitária"
 
 # Login
 LANG_ENTER_USERNAME="Digite seu usuário Steam:"

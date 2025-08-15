@@ -68,8 +68,6 @@ while true; do
     esac
 done
 
-
-# Langs Depots
 # Language depots for each game
 declare -A HL2_LANG_DEPOTS=(
     [french]=227 [german]=228 [russian]=225 [spanish]=226
@@ -143,7 +141,7 @@ while true; do
     commands=()
     back_to_main=false
 
-    clear
+   # clear
     echo
     echo -e "${BOLD}$LANG_TITLE${RESET}"
     echo
@@ -383,7 +381,7 @@ while true; do
         continue
     fi
 
-    # Ask if the user wants to download language packs
+	# Ask if the user wants to download language packs
 	back_to_main=false
 
 	while true; do
@@ -404,59 +402,135 @@ while true; do
 
 		case "$choose_langpacks" in
 			1)
-				# Language selection only for supported games
-				available_langs=()
-				for args in "${commands[@]}"; do
-					appid=$(echo "$args" | awk '{for(i=1;i<=NF;i++) if($i=="-app") print $(i+1)}')
-					depot=$(echo "$args" | awk '{for(i=1;i<=NF;i++) if($i=="-depot") print $(i+1)}')
-					case "$appid" in
-						220)
-							if [[ $depot == 221 ]]; then
-								available_langs+=("${!HL2_LANG_DEPOTS[@]}")
-							elif [[ $depot == 389 || $depot == 380 ]]; then
-								available_langs+=("${!HL2_EP1_LANG_DEPOTS[@]}")
-							elif [[ $depot == 420 ]]; then
-								available_langs+=("${!HL2_EP2_LANG_DEPOTS[@]}")
+				# Tela intermediária: Oficial ou Comunidade
+				while true; do
+					clear
+					echo
+					echo -e "${BOLD}$LANG_TRANSLATION_TYPE${RESET}"
+					echo
+					echo "1) $LANG_TRANSLATION_OFFICIAL"
+					echo "2) $LANG_TRANSLATION_COMMUNITY"
+					echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
+					echo "============================"
+					read -p "$LANG_PROMPT_CHOOSE (1-2): " translation_type
+
+					if [[ "$translation_type" == "b" ]]; then
+						break
+					fi
+
+					case "$translation_type" in
+						1) # Traduções oficiais
+							available_langs=()
+							for args in "${commands[@]}"; do
+								appid=$(echo "$args" | awk '{for(i=1;i<=NF;i++) if($i=="-app") print $(i+1)}')
+								depot=$(echo "$args" | awk '{for(i=1;i<=NF;i++) if($i=="-depot") print $(i+1)}')
+								case "$appid" in
+									220)
+										if [[ $depot == 221 ]]; then available_langs+=("${!HL2_LANG_DEPOTS[@]}"); fi
+										if [[ $depot == 389 || $depot == 380 ]]; then available_langs+=("${!HL2_EP1_LANG_DEPOTS[@]}"); fi
+										if [[ $depot == 420 ]]; then available_langs+=("${!HL2_EP2_LANG_DEPOTS[@]}"); fi
+										;;
+									240) available_langs+=("${!CSS_LANG_DEPOTS[@]}") ;;
+									400) available_langs+=("${!PORTAL_LANG_DEPOTS[@]}") ;;
+									70)  available_langs+=("${!HL_LANG_DEPOTS[@]}") ;;
+									130) available_langs+=("${!HLBS_LANG_DEPOTS[@]}") ;;
+									50)  available_langs+=("${!HLOF_LANG_DEPOTS[@]}") ;;
+									10)  available_langs+=("${!CS_LANG_DEPOTS[@]}") ;;
+									20)  available_langs+=("${!TFC_LANG_DEPOTS[@]}") ;;
+								esac
+							done
+							available_langs=($(printf "%s\n" "${available_langs[@]}" | sort -u))
+
+							clear
+							echo
+							echo -e "${BOLD}$LANG_SELECT_LANGUAGE_PACK${RESET}"
+							echo
+							i=1
+							declare -A lang_menu
+							for lang in "${available_langs[@]}"; do
+								echo "$i) ${lang_display_names[$lang]}"
+								lang_menu[$i]=$lang
+								((i++))
+							done
+							echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
+							echo "============================"
+
+							read -p "$LANG_PROMPT_CHOOSE (1-$((i-1))): " lang_choice
+
+							if [[ "$lang_choice" == "b" ]]; then break; fi
+							if [[ "$lang_choice" =~ ^[0-9]+$ ]] && (( lang_choice >= 1 && lang_choice <= i-1 )); then
+								selected_lang="${lang_menu[$lang_choice]}"
+								break 2
+							else
+								echo -e "\n${RED}$LANG_INVALID_OPTION${RESET} $LANG_TRY_AGAIN"
+								sleep 2
 							fi
 							;;
-						240) available_langs+=("${!CSS_LANG_DEPOTS[@]}") ;;
-						400) available_langs+=("${!PORTAL_LANG_DEPOTS[@]}") ;;
-						70)  available_langs+=("${!HL_LANG_DEPOTS[@]}") ;;
-						130) available_langs+=("${!HLBS_LANG_DEPOTS[@]}") ;;
-						50)  available_langs+=("${!HLOF_LANG_DEPOTS[@]}") ;;
-						10)  available_langs+=("${!CS_LANG_DEPOTS[@]}") ;;
-						20)  available_langs+=("${!TFC_LANG_DEPOTS[@]}") ;;
+						2) # Traduções da comunidade
+							# Mapeamento dos links de pacotes da comunidade
+							declare -A COMMUNITY_PACKS
+							COMMUNITY_PACKS["220,pt-BR"]="https://example.com/hl2_pt-BR.zip"
+							COMMUNITY_PACKS["220,es-ES"]="https://example.com/hl2_es-ES.zip"
+							COMMUNITY_PACKS["240,pt-BR"]="https://example.com/css_pt-BR.zip"
+							COMMUNITY_PACKS["400,pt-BR"]="https://example.com/portal_pt-BR.zip"
+							COMMUNITY_PACKS["400,fr-FR"]="https://example.com/portal_fr-FR.zip"
+							COMMUNITY_PACKS["70,pt-BR"]="https://github.com/source-br/Xash3D-pt-br/releases/download/1.0/Half.life.1.7z"
+							COMMUNITY_PACKS["10,pt-BR"]="https://example.com/cs_pt-BR.zip"
+
+							# Seleção do idioma da comunidade
+							clear
+							echo
+							echo -e "${BOLD}$LANG_SELECT_COMMUNITY_LANG${RESET}"
+							echo
+							community_langs=()
+							for key in "${!COMMUNITY_PACKS[@]}"; do
+								lang="${key#*,}"
+								community_langs+=("$lang")
+							done
+							community_langs=($(printf "%s\n" "${community_langs[@]}" | sort -u))
+							i=1
+							declare -A community_menu
+							for lang in "${community_langs[@]}"; do
+								echo "$i) ${lang}"
+								community_menu[$i]=$lang
+								((i++))
+							done
+							echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
+							echo "============================"
+
+							read -p "$LANG_PROMPT_CHOOSE (1-$((i-1))): " lang_choice
+							if [[ "$lang_choice" == "b" ]]; then break; fi
+							if [[ "$lang_choice" =~ ^[0-9]+$ ]] && (( lang_choice >= 1 && lang_choice <= i-1 )); then
+								selected_lang="${community_menu[$lang_choice]}"
+							else
+								echo -e "\n${RED}$LANG_INVALID_OPTION${RESET} $LANG_TRY_AGAIN"
+								sleep 2
+								continue
+							fi
+
+							# Download dos pacotes de comunidade
+							echo -e "${BOLD}${GREEN}$LANG_DOWNLOADING_COMMUNITY_LANG${RESET} ${selected_lang}"
+							mkdir -p ./downloads
+							for args in "${commands[@]}"; do
+								appid=$(echo "$args" | awk '{for(i=1;i<=NF;i++) if($i=="-app") print $(i+1)}')
+								game_name=$(get_game_name "$appid")
+								pack_url="${COMMUNITY_PACKS["$appid,$selected_lang"]}"
+								if [[ -n "$pack_url" ]]; then
+									echo -e "${BOLD}$LANG_DOWNLOADING${RESET} $game_name ($selected_lang)"
+									curl -L -o "./downloads/${appid}_${selected_lang}.zip" "$pack_url" || \
+										echo -e "${RED}$LANG_FAILED_DOWNLOAD $game_name ($selected_lang)${RESET}"
+								else
+									echo -e "${YELLOW}$LANG_NO_COMMUNITY_PACK $game_name ($selected_lang)${RESET}"
+								fi
+							done
+							break 2
+							;;
+						*)
+							echo -e "\n${RED}$LANG_INVALID_OPTION${RESET} $LANG_TRY_AGAIN"
+							sleep 2
+							;;
 					esac
 				done
-				available_langs=($(printf "%s\n" "${available_langs[@]}" | sort -u))
-
-				clear
-				echo
-				echo -e "${BOLD}$LANG_SELECT_LANGUAGE_PACK${RESET}"
-				echo
-				i=1
-				declare -A lang_menu
-				for lang in "${available_langs[@]}"; do
-					echo "$i) ${lang_display_names[$lang]}"
-					lang_menu[$i]=$lang
-					((i++))
-				done
-				echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
-				echo "============================"
-
-				read -p "$LANG_PROMPT_CHOOSE (1-$((i-1))): " lang_choice
-
-				if [[ "$lang_choice" == "b" ]]; then
-					back_to_main=true
-					break 
-				elif [[ "$lang_choice" =~ ^[0-9]+$ ]] && (( lang_choice >= 1 && lang_choice <= i-1 )); then
-					selected_lang="${lang_menu[$lang_choice]}"
-					break
-				else
-					echo -e "\n${RED}$LANG_INVALID_OPTION${RESET} $LANG_TRY_AGAIN"
-					sleep 2
-					continue
-				fi
 				;;
 			2)
 				selected_lang=""
@@ -472,6 +546,7 @@ while true; do
 	if $back_to_main; then
 		continue
 	fi
+
 
     # Login
     clear
