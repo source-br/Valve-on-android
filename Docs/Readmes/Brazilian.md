@@ -4,6 +4,9 @@
     <a href="../../README.md" target="_blank">
         <img src="../img/readme/flag_eua.png" height="25" width="25">
     </a>
+    <a href="Russian.md" target="_blank">
+        <img src="../img/readme/russian.png" height="25" width="25">
+    </a>
 </div>
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=27&pause=1000&color=ff5500&center=true&vCenter=true&repeat=true&width=1000&lines=Valve+no+Android)](https://git.io/typing-svg)
