@@ -1,42 +1,32 @@
-LANG_TITLE="Quais jogos você quer baixar?"
+#depot
+LANG_DEPOT="O DepotDownloader é necessário, mas não foi encontrado."
+LANG_TRY_INSTALL_DEPOT="O script tentará instalar o TermuxDepotDownloader em 5 segundos..."
+
+# Main screen
 LANG_MAIN_OPTION_ALL="Todos os jogos"
 LANG_MAIN_OPTION_MANUAL="Selecionar manualmente"
-LANG_MAIN_OPTION_EXIT="Sair"
-LANG_PROMPT_CHOOSE_MAIN="Escolha uma opção (1-3):"
-LANG_ENTER_USERNAME="Digite seu nome de usuário Steam:"
-LANG_ENTER_PASSWORD="Digite sua senha Steam:"
-LANG_DOWNLOADING="Baixando:"
-LANG_EXITING="Saindo..."
-LANG_FAILED="Falha ao executar o comando acima."
-LANG_PRESS_ENTER="Pressione ENTER para voltar ao menu principal..."
-LANG_NO_GAMES="Nenhum jogo selecionado. Voltando ao menu..."
-LANG_GAMES_TITLE="Quais jogos você deseja baixar?"
+
+# All games
+LANG_ALL_SOURCE="Todos os jogos Source"
+LANG_ALL_GOLDSRC="Todos os jogos Goldsrc"
+
+# Mannualy
 LANG_GAMES_TITLE_SOURCE="Jogos Source:"
 LANG_GAMES_TITLE_GOLDSRC="Jogos Goldsrc:"
-LANG_OPTION_BACK="Voltar ao menu principal"
-LANG_PROMPT_CHOOSE_GAMES="Escolha uma ou mais opções, separadas por vírgulas Ex: 1,3 (1–13):"
+LANG_PROMPT_CHOOSE_MORE="Escolha uma ou mais opções, separadas por vírgulas Ex: 1,3"
+
+# Goldsrc
 LANG_GOLDSRCVERSION_TITLE="Qual versão dos jogos Goldsrc você deseja?"
 LANG_GOLDSRCVERSION_OPTION_25TH="Versão de 25º Aniversário"
 LANG_WARNING_NEW_VERSION="! Atenção: Versão mais recente, melhor para o Xash3D-FWGS (Engine nova)"
 LANG_GOLDSRCVERSION_OPTION_PRE25TH="Versão anterior ao 25º Aniversário"
 LANG_WARNING_OLD_VERSION="! Atenção: Versão mais antiga, melhor para o Xash3D-FWGS (Engine antiga)"
-LANG_OPTION_BOTH="Ambas"
-LANG_DOWNLOADS_OPTION_ALL_TITLE="Quais jogos você deseja baixar?"
-LANG_DOWNLOADS_OPTION_ALL_SOURCE="Todos os jogos Source"
-LANG_DOWNLOADS_OPTION_ALL_GOLDSRC="Todos os jogos Goldsrc"
-LANG_NO_COMMANDS="Nenhum comando selecionado. Retornando ao menu principal..."
-LANG_COMMANDS_ABOVE="Falha ao executar o comando acima."
-LANG_INVALID_OPTION="Opção inválida."
-LANG_ERROR="Erro"
-LANG_DEPOT="O DepotDownloader é necessário, mas não foi encontrado.\nInstale-o conforme indicado no README e tente novamente."
+
+# Select languages
 LANG_ASK_LANGUAGE_PACKS="Deseja baixar pacotes de idioma adicionais?"
 LANG_SELECT_LANGUAGE_PACK="Selecione o pacote de idioma que deseja incluir:"
-LANG_YES="Sim"
-LANG_NO="Não"
-LANG_DOWNLOADING_LANG_PACK="Baixando pacote de idioma:"
-LANG_PROMPT_CHOOSE_YES_NO="Escolha uma opção (1-2):"
-LANG_PROMPT_CHOOSE_LANGUAGES="Escolha uma opção (1-11):"
-LANG_PROMPT_CHOOSE="Escolha uma opção:"
+
+# Languages
 LANG_ENGLISH="English (Inglês)"
 LANG_SPANISH="Español (Espanhol)"
 LANG_THAI="ไทย (Tailandês)"
@@ -48,3 +38,28 @@ LANG_TCHINESE="繁體中文 (Chinês Tradicional)"
 LANG_SCHINESE="简体中文 (Chinês Simplificado)"
 LANG_ITALIAN="Italiano (Italiano)"
 LANG_JAPANESE="日本語 (Japonês)"
+
+# Login
+LANG_ENTER_USERNAME="Digite seu usuário Steam:"
+LANG_ENTER_PASSWORD="Digite sua senha Steam:"
+
+# Genreic options
+LANG_NO="Não"
+LANG_YES="Sim"
+LANG_EXIT="Sair"
+LANG_BOTH="Ambas"
+LANG_ERROR="Erro:"
+LANG_EXITING="Saindo..."
+LANG_DOWNLOADING="Baixando:"
+LANG_INSTALLING="Instalando:"
+LANG_INVALID_OPTION="Opção inválida"
+LANG_PROMPT_CHOOSE="Escolha uma opção:"
+LANG_SUCCESS="foi instalado com sucesso"
+LANG_TITLE="Quais jogos você quer baixar?"
+LANG_OPTION_BACK="Voltar ao menu principal"
+LANG_FAILED="Falha ao executar o comando acima"
+LANG_PRESS_ENTER="Pressione ENTER para voltar ao menu principal..."
+LANG_NO_COMMANDS="Nenhum comando selecionado. Retornando ao menu principal..."
+LANG_COMMANDS_ABOVE="Falha ao executar o comando acima"
+LANG_NO_GAMES="Nenhum jogo selecionado. Voltando ao menu..."
+LANG_DOWNLOADING_LANG_PACK="Baixando pacote de idioma:"

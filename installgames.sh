@@ -36,7 +36,7 @@ load_language_script() {
 while true; do
     clear
 	echo
-    echo "Select language:"
+    echo -e "${BOLD}Select language:${RESET}"
     echo
     echo "1) English"
     echo "2) Português (Brasil)"
@@ -125,17 +125,17 @@ declare -A lang_display_names=(
 
 # Check if depotdownloader is installed
 if ! command -v depotdownloader >/dev/null 2>&1; then
-    echo -e "${RED}$LANG_ERROR:${RESET} $LANG_DEPOT"
-	echo "Script will attempt to install TermuxDepotDownloader in 5 seconds..."
+    clear
+    echo -e "${RED}[!] $LANG_ERROR:${RESET} $LANG_DEPOT"
+	echo -e "$LANG_INSTALL_DEPOT"
  	sleep 5
-  	echo -e "installing depotdownloader..."
+  	echo -e "${BOLD}${GREEN}$LANG_INSTALLING${RESET} depotdownloader"
    	sleep 3
 	curl -LO "https://raw.githubusercontent.com/TheKingFireS/TermuxDepotDownloader/alpine/installproot.sh"
 	chmod +x installproot.sh
 	./installproot.sh
- 	echo -e "depotdownloader is successfuly installed"
+ 	echo -e "${BOLD}${GREEN}[*] depotdownloader $LANG_SUCCESS${RESET}"
   	#sleep 3
-    exit 1
 fi
 
 # Main loop
@@ -145,13 +145,13 @@ while true; do
 
     clear
     echo
-    echo "$LANG_TITLE"
+    echo -e "${BOLD}$LANG_TITLE${RESET}"
     echo
     echo "1) $LANG_MAIN_OPTION_ALL"
     echo "2) $LANG_MAIN_OPTION_MANUAL"
-    echo -e "${RED}3) $LANG_MAIN_OPTION_EXIT${RESET}"
+    echo -e "${RED}3) $LANG_EXIT${RESET}"
     echo "============================"
-    read -p "$LANG_PROMPT_CHOOSE_MAIN " main_menu
+    read -p "$LANG_PROMPT_CHOOSE (1-3):" main_menu
 
     if [[ "$main_menu" == "3" ]]; then
         echo -e "${RED}$LANG_EXITING${RESET}"
@@ -221,11 +221,11 @@ while true; do
     if [[ "$main_menu" == "1" ]]; then
         clear
         echo
-        echo "$LANG_DOWNLOADS_OPTION_ALL_TITLE"
+        echo -e "${BOLD}$LANG_TITLE${RESET}"
         echo
         echo "1) $LANG_MAIN_OPTION_ALL"
-        echo "2) $LANG_DOWNLOADS_OPTION_ALL_SOURCE"
-        echo "3) $LANG_DOWNLOADS_OPTION_ALL_GOLDSRC"
+        echo "2) $LANG_ALL_SOURCE"
+        echo "3) $LANG_ALL_GOLDSRC"
         echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
         echo "============================"
         read -p "$LANG_PROMPT_CHOOSE " all_option
@@ -237,13 +237,13 @@ while true; do
         if [[ "$all_option" == "1" || "$all_option" == "3" ]]; then
             clear
             echo
-            echo "$LANG_GOLDSRCVERSION_TITLE"
+            echo "${BOLD}$LANG_GOLDSRCVERSION_TITLE${RESET}"
             echo
             echo "1) $LANG_GOLDSRCVERSION_OPTION_25TH"
             echo -e "${YELLOW}$LANG_WARNING_NEW_VERSION${RESET}"
             echo "2) $LANG_GOLDSRCVERSION_OPTION_PRE25TH"
             echo -e "${YELLOW}$LANG_WARNING_OLD_VERSION${RESET}"
-            echo "3) $LANG_OPTION_BOTH"
+            echo "3) $LANG_BOTH"
             echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
             echo "============================"
             read -p "$LANG_PROMPT_CHOOSE " goldsrc_version
@@ -262,7 +262,7 @@ while true; do
         while true; do
             clear
             echo
-            echo "$LANG_GAMES_TITLE"
+            echo -e "${BOLD}$LANG_TITLE${RESET}"
             echo
             echo -e "${BOLD}$LANG_GAMES_TITLE_SOURCE${RESET}"
             echo -e "${ORANGE}1) Half-Life 2${RESET}"
@@ -282,7 +282,7 @@ while true; do
             echo -e "${YELLOW}13) Team Fortress Classic${RESET}"
             echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
             echo "============================"
-            read -p "$LANG_PROMPT_CHOOSE_GAMES " selections
+            read -p "$LANG_PROMPT_CHOOSE_MORE (1–13):" selections
 
             if [[ "$selections" == "b" ]]; then
                 back_to_main=true
@@ -313,13 +313,13 @@ while true; do
                 while true; do
                     clear
                     echo
-                    echo "$LANG_GOLDSRCVERSION_TITLE"
+                    echo -e "${BOLD}$LANG_GOLDSRCVERSION_TITLE${RESET}"
                     echo
                     echo "1) $LANG_GOLDSRCVERSION_OPTION_25TH"
                     echo -e "${YELLOW}$LANG_WARNING_NEW_VERSION${RESET}"
                     echo "2) $LANG_GOLDSRCVERSION_OPTION_PRE25TH"
                     echo -e "${YELLOW}$LANG_WARNING_OLD_VERSION${RESET}"
-                    echo "3) $LANG_OPTION_BOTH"
+                    echo "3) $LANG_BOTH"
                     echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
                     echo "============================"
                     read -p "$LANG_PROMPT_CHOOSE " manual_version
@@ -389,13 +389,13 @@ while true; do
 	while true; do
 		clear
 		echo
-		echo "$LANG_ASK_LANGUAGE_PACKS"
+		echo -e "${BOLD}$LANG_ASK_LANGUAGE_PACKS${RESET}"
 		echo
 		echo "1) $LANG_YES"
 		echo "2) $LANG_NO"
 		echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
 		echo "============================"
-		read -p "$LANG_PROMPT_CHOOSE_YES_NO " choose_langpacks
+		read -p "$LANG_PROMPT_CHOOSE (1-2):" choose_langpacks
 
 		if [[ "$choose_langpacks" == "b" ]]; then
 			back_to_main=true
@@ -432,7 +432,7 @@ while true; do
 
 				clear
 				echo
-				echo "$LANG_SELECT_LANGUAGE_PACK"
+				echo -e "${BOLD}$LANG_SELECT_LANGUAGE_PACK${RESET}"
 				echo
 				i=1
 				declare -A lang_menu
@@ -470,7 +470,7 @@ while true; do
 	done
 
 	if $back_to_main; then
-		continue  # volta para o menu inicial, sem fechar o programa
+		continue
 	fi
 
     # Login
@@ -499,7 +499,7 @@ while true; do
         clear
         echo -e "${BOLD}${GREEN}$LANG_DOWNLOADING${RESET} $game_name"
         eval "$base_command $args" || {
-            echo -e "${RED}Error executing the command above.${RESET}"
+            echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"
             exit 1
         }
 
