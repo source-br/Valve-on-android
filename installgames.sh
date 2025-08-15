@@ -126,7 +126,7 @@ declare -A lang_display_names=(
 # Check if depotdownloader is installed
 if ! command -v depotdownloader >/dev/null 2>&1; then
     clear
-    echo -e "${RED}[!] $LANG_ERROR:${RESET} $LANG_DEPOT"
+    echo -e "${BOLD}${RED}[!] $LANG_ERROR${RESET} $LANG_DEPOT"
 	echo -e "$LANG_INSTALL_DEPOT"
  	sleep 5
   	echo -e "${BOLD}${GREEN}$LANG_INSTALLING${RESET} depotdownloader"
@@ -151,10 +151,10 @@ while true; do
     echo "2) $LANG_MAIN_OPTION_MANUAL"
     echo -e "${RED}3) $LANG_EXIT${RESET}"
     echo "============================"
-    read -p "$LANG_PROMPT_CHOOSE (1-3):" main_menu
+    read -p "$LANG_PROMPT_CHOOSE (1-3): " main_menu
 
     if [[ "$main_menu" == "3" ]]; then
-        echo -e "${RED}$LANG_EXITING${RESET}"
+        echo -e "${RED}[!] $LANG_EXITING${RESET}"
         exit 0
     fi
 
@@ -228,7 +228,7 @@ while true; do
         echo "3) $LANG_ALL_GOLDSRC"
         echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
         echo "============================"
-        read -p "$LANG_PROMPT_CHOOSE " all_option
+        read -p "$LANG_PROMPT_CHOOSE (1-3): " all_option
 
         if [[ "$all_option" == "b" ]]; then
             continue
@@ -237,7 +237,7 @@ while true; do
         if [[ "$all_option" == "1" || "$all_option" == "3" ]]; then
             clear
             echo
-            echo "${BOLD}$LANG_GOLDSRCVERSION_TITLE${RESET}"
+            echo -e "${BOLD}$LANG_GOLDSRCVERSION_TITLE${RESET}"
             echo
             echo "1) $LANG_GOLDSRCVERSION_OPTION_25TH"
             echo -e "${YELLOW}$LANG_WARNING_NEW_VERSION${RESET}"
@@ -246,7 +246,7 @@ while true; do
             echo "3) $LANG_BOTH"
             echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
             echo "============================"
-            read -p "$LANG_PROMPT_CHOOSE " goldsrc_version
+            read -p "$LANG_PROMPT_CHOOSE (1-3): " goldsrc_version
 
             if [[ "$goldsrc_version" == "b" ]]; then
                 continue
@@ -282,7 +282,7 @@ while true; do
             echo -e "${YELLOW}13) Team Fortress Classic${RESET}"
             echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
             echo "============================"
-            read -p "$LANG_PROMPT_CHOOSE_MORE (1–13):" selections
+            read -p "$LANG_PROMPT_CHOOSE_MORE (1–13): " selections
 
             if [[ "$selections" == "b" ]]; then
                 back_to_main=true
@@ -322,7 +322,7 @@ while true; do
                     echo "3) $LANG_BOTH"
                     echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
                     echo "============================"
-                    read -p "$LANG_PROMPT_CHOOSE " manual_version
+                    read -p "$LANG_PROMPT_CHOOSE: " manual_version
 
                     if [[ "$manual_version" == "b" ]]; then
                         back_to_main=true
@@ -378,7 +378,7 @@ while true; do
     fi
 
     if [[ "${#commands[@]}" -eq 0 ]]; then
-        echo -e "${RED}$LANG_NO_COMMANDS${RESET}"
+        echo -e "${RED}[!] $LANG_NO_COMMANDS${RESET}"
         sleep 2
         continue
     fi
@@ -395,7 +395,7 @@ while true; do
 		echo "2) $LANG_NO"
 		echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
 		echo "============================"
-		read -p "$LANG_PROMPT_CHOOSE (1-2):" choose_langpacks
+		read -p "$LANG_PROMPT_CHOOSE (1-2): " choose_langpacks
 
 		if [[ "$choose_langpacks" == "b" ]]; then
 			back_to_main=true
@@ -453,7 +453,7 @@ while true; do
 					selected_lang="${lang_menu[$lang_choice]}"
 					break
 				else
-					echo -e "\n${RED}$LANG_INVALID_OPTION${RESET} $LANG_TRY_AGAIN"
+					echo -e "\n${RED}[!] $LANG_INVALID_OPTION${RESET} $LANG_TRY_AGAIN"
 					sleep 2
 					continue
 				fi
@@ -463,7 +463,7 @@ while true; do
 				break
 				;;
 			*)
-				echo -e "\n${RED}$LANG_INVALID_OPTION${RESET} $LANG_TRY_AGAIN"
+				echo -e "\n${RED}[!] $LANG_INVALID_OPTION${RESET} $LANG_TRY_AGAIN"
 				sleep 2
 				;;
 		esac
@@ -499,7 +499,7 @@ while true; do
         clear
         echo -e "${BOLD}${GREEN}$LANG_DOWNLOADING${RESET} $game_name"
         eval "$base_command $args" || {
-            echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"
+            echo -e "${RED}[!] $LANG_COMMANDS_ABOVE${RESET}"
             exit 1
         }
 
@@ -528,7 +528,7 @@ while true; do
             esac
             if [[ -n "$depot_id" ]]; then
                 echo -e "${BOLD}${GREEN}$LANG_DOWNLOADING_LANG_PACK${RESET} ${lang_display_names[$selected_lang]}"
-                eval "$base_command -app $appid -depot $depot_id" || { echo -e "${RED}$LANG_COMMANDS_ABOVE${RESET}"; exit 1; }
+                eval "$base_command -app $appid -depot $depot_id" || { echo -e "${RED}[!] $LANG_COMMANDS_ABOVE${RESET}"; exit 1; }
             fi
         fi
     done
