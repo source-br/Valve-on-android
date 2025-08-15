@@ -68,6 +68,7 @@ while true; do
     esac
 done
 
+
 # Langs Depots
 # Language depots for each game
 declare -A HL2_LANG_DEPOTS=(
