@@ -59,9 +59,9 @@ This project aims to make it easier to download Valve games on Android legally.
 > so you may encounter issues not present in GH/FD versions."
 
 -----
-Copy and paste this text in Termux to setup this repository:
+Copy and paste this code in Termux to use this script:
 ```
-curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/valve-on-android.sh" && chmod +x installgames.sh && ./installgames.sh
+curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/valve-on-android.sh" && chmod +x valve-on-android.sh && ./valve-on-android.sh
 ```
 
 <div align="center">

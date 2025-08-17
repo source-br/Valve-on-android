@@ -61,7 +61,7 @@ Vejam a [Documentação](../PT-BR/Documentação.md)
 -----
 Copie e cole o comando abaixo no Termux para usar o script:
 ```
-curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/valve-on-android.sh" && chmod +x installgames.sh && ./installgames.sh
+curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/valve-on-android.sh" && chmod +x valve-on-android.sh && ./valve-on-android.sh
 ```
 
 <div align="center">

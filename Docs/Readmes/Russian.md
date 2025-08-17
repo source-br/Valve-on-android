@@ -25,7 +25,7 @@ valve-on-android это улитита Termux которая изпользуе�
 
 Скопируйте и вставьте этот текст в Termux чтобы настроить этот репозиторий:
 ```
-curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/valve-on-android.sh" && chmod +x installgames.sh && ./installgames.sh
+curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/valve-on-android.sh" && chmod +x valve-on-android.sh && ./valve-on-android.sh
 ```
 
 <div align="center">
