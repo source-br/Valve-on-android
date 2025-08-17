@@ -1,4 +1,4 @@
-<img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=ff5500&height=85&section=header"/>
+<img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=32de84&height=85&section=header"/>
 
 <div align="right">
     <a href="Brazilian.md" target="_blank">
@@ -9,21 +9,29 @@
     </a>
 </div>
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=27&pause=1000&color=ff5500&center=true&vCenter=true&repeat=true&width=1000&lines=Valve+on+Android)](https://git.io/typing-svg)
+<div align="center">
 
-[![Discord](https://img.shields.io/discord/1189628376504340590?logo=Discord&label=Discord%20server&color=ff5500)](https://discord.gg/tVNv6SNZZT)
+![Title](/Docs/img/logos/title.png)
+
+</div>
+
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=27&pause=1000&color=ffffff&center=true&vCenter=true&repeat=true&width=1000&lines=Valve+on+Android)](https://git.io/typing-svg)
+
+[![Discord](https://img.shields.io/discord/1189628376504340590?logo=Discord&label=Discord%20server&color=32de84)](https://discord.gg/tVNv6SNZZT)
 
 Этот проект нацелен на легальную установку игр Valve изпользуя Termux
 
 valve-on-android это улитита Termux которая изпользует [TermuxDepotDownloader](https://github.com/TheKingFireS/TermuxDepotDownloader) созданным благадоря [TheKingFireS](https://github.com/TheKingFireS)
 
-Эта улитита требует установленный TermuxDepotDownloader на вашем Termux, вы можете установить улититу [здесь](https://github.com/TheKingFireS/TermuxDepotDownloader)
-
 Скопируйте и вставьте этот текст в Termux чтобы настроить этот репозиторий:
 ```
-curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/installgames.sh" && chmod +x installgames.sh && ./installgames.sh
+curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/valve-on-android.sh" && chmod +x installgames.sh && ./installgames.sh
 ```
 
-<img width="2382" height="945" alt="1000183744" src="https://github.com/user-attachments/assets/9d7d1c9e-9b08-45ff-ac71-1170e0e7ba20" />
+<div align="center">
+  <img src="../img/screen1.png" width="33%">
+  <img src="../img/RU/screen2.png" width="33%">
+  <img src="../img/RU/screen3.png" width="33%">
+</div>
 
-<img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=ff5500&height=85&section=footer"/>
+<img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=32de84&height=85&section=footer"/>
