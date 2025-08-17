@@ -65,9 +65,9 @@ curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/valv
 ```
 
 <div align="center">
-  <img src="Docs/img/screen1.png" width="33%">
-  <img src="Docs/img/screen2.png" width="33%">
-  <img src="Docs/img/screen3.png" width="33%">
+  <img src="Docs/img/screen1.png" width="30%">
+  <img src="Docs/img/screen2.png" width="30%">
+  <img src="Docs/img/screen3.png" width="30%">
 </div>
 
 <img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=32de84&height=85&section=footer"/>

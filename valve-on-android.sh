@@ -4,6 +4,8 @@
 # Environment variables
 # ==========================================
 export SET_DIR="/storage/emulated/0/"
+export LANG_FAILED
+export LANG_FAILED_COMMAND
 
 # ==========================================
 # ANSI Colors
