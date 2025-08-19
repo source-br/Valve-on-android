@@ -23,6 +23,8 @@ This project aims to make it easier to download Valve games on Android legally.
 
 `valve-on-android` is a Termux tool that uses [TermuxDepotDownloader](https://github.com/TheKingFireS/TermuxDepotDownloader) by [TheKingFireS](https://github.com/TheKingFireS)
 
+[Termux](https://github.com/termux/termux-app)
+
 ## Features:
 
 * Multi-language support in the script interface.
