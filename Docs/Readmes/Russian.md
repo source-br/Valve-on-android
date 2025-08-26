@@ -23,6 +23,41 @@
 
 valve-on-android это улитита Termux которая изпользует [TermuxDepotDownloader](https://github.com/TheKingFireS/TermuxDepotDownloader) созданным благадоря [TheKingFireS](https://github.com/TheKingFireS)
 
+[Termux](https://github.com/termux/termux-app)
+
+# Фичи
+	- Мульти-языковая поддержка в интерфейсе скрипта
+ 
+	- Автоматическая установка TermuxDepotDownloader, если он не установлен
+ 
+	- Поддержка установки следующих игр:
+		- Half-Life 2
+		- Half-Life 2: Episode 1
+		- Half-Life 2: Episode 2
+		- Half-Life 2: Deathmatch
+		- Half-Life: Source
+		- Counter-Strike: Source
+		- Day of Defeat: Source
+		- Portal
+		- Half-Life
+		- Half-Life: Blue Shift
+		- Half-Life: Opposing Force
+		- Counter-Strike
+		- Team Fortress Classic
+	- Поддержка установки офицальных языковых паков Steam
+	- Поддержка установки языковых паков, созданных комьюнити (наши проекты и другие проекты - прямо сейчас спрятано в скрипте)
+> [!ВНИМАНИЕ]
+> TermuxDepotDownloader не рекомендован для изпользования на версии Google Play Store; Изпользуйте F-Droid или Github версию Termux
+> Сообщение взятое от самого разработчика TermuxDepotDownloader:
+> "версия Google Play Store на самом деле не обновлена,
+> это форк одинаковой версии Termux с некими тестами для обманки строгой политики Google Play Store
+> Вот сообщение от самих создателей Termux о оповещении Google Play:
+> https://github.com/termux/termux-app/discussions/4000
+> Команда Termux рекомендует изпользовать F-Droid или Github версию чем версию Google Play Store.
+> а также скрипт не был проверен на версии Google Play,
+> так что вы можете иметь проблемы которых нет на версии GH/FD."
+
+-----
 Скопируйте и вставьте этот текст в Termux чтобы настроить этот репозиторий:
 ```
 curl -LO "https://raw.githubusercontent.com/source-br/Valve-on-android/main/valve-on-android.sh" && chmod +x valve-on-android.sh && ./valve-on-android.sh
