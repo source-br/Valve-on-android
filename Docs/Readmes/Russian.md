@@ -5,7 +5,7 @@
         <img src="../img/readme/flag_br.png" height="25" width="25">
     </a>
     <a href="../../README.md" target="_blank">
-        <img src="../img/readme/flag_eua.png" height="25" width="25">
+        <img src="../img/readme/flag_us.png" height="25" width="25">
     </a>
 </div>
 
@@ -26,11 +26,9 @@
 [Termux](https://github.com/termux/termux-app)
 
 ## Особенности:
-
 * Поддержка нескольких языков в интерфейсе скрипта.
 * Автоматическая загрузка DepotDownloader, если он не установлен.
 * Поддержка загрузки следующих игр:
-
   * Half-Life 2
   * Half-Life 2: Episode 1
   * Half-Life 2: Episode 2
@@ -44,18 +42,18 @@
   * Half-Life: Opposing Force
   * Counter-Strike
   * Team Fortress Classic
-
 * Поддержка загрузки официальных языковых пакетов из Steam.
 * Поддержка загрузки языковых пакетов от сообщества (наши переводы и сторонние — пока скрыты в скрипте).
 
 > [!WARNING]
-> TermuxDepotDownloader не рекомендуется для использования в версии Termux из Google Play Store. Используйте версию из F-Droid или GitHub.  
->  
+> TermuxDepotDownloader не рекомендуется для использования в версии Termux из Google Play Store.  
+> Используйте версию из F-Droid или GitHub.  
+>
 > Предупреждение из самого TermuxDepotDownloader:  
 > "Версия из Google Play Store на самом деле не обновляется,  
 > это всего лишь форк той же версии с некоторыми тестами,  
 > чтобы соответствовать строгой политике Google Play Store.  
->  
+>
 > Подробнее читайте в объявлении разработчиков Termux:  
 > https://github.com/termux/termux-app/discussions/4000  
 > Команда Termux рекомендует использовать версии из GitHub  

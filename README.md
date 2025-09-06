@@ -5,7 +5,7 @@
         <img src="Docs/img/readme/flag_br.png" height="25" width="25">
     </a>
     <a href="Docs/Readmes/Russian.md" target="_blank">
-        <img src="Docs/img/readme/russian.png" height="25" width="25">
+        <img src="Docs/img/readme/flag_ru.png" height="25" width="25">
     </a>
 </div>
 
@@ -26,11 +26,9 @@ This project aims to make it easier to download Valve games on Android legally.
 [Termux](https://github.com/termux/termux-app)
 
 ## Features:
-
 * Multi-language support in the script interface.
 * Automatic download of DepotDownloader if not installed.
 * Support for downloading the following games:
-
   * Half-Life 2
   * Half-Life 2: Episode 1
   * Half-Life 2: Episode 2
@@ -48,16 +46,19 @@ This project aims to make it easier to download Valve games on Android legally.
 * Support for downloading community language packs (our projects and other translations — currently hidden in the script).
 
 > [!WARNING]
-> TermuxDepotDownloader is not recommended for use on the Google Play Store version of Termux; use the F-Droid or GitHub version instead.
-> Warning taken from TermuxDepotDownloader itself:
-> "Google Play Store version is actually not updated,
-> it's just a fork of the same version with some tests to
-> conform to Google Play Store's strict policy.
-> See more info in Termux dev's Google Play announcement:
-> https://github.com/termux/termux-app/discussions/4000
-> Termux dev team recommends using GitHub or
-> F-Droid instead of the Google Play Store version.
-> Also, the script is not tested on the Play Store version,
+> TermuxDepotDownloader is not recommended for use on the Google Play Store version of Termux.  
+> Use the F-Droid or GitHub version instead.  
+>
+> Warning taken from TermuxDepotDownloader itself:  
+> "Google Play Store version is actually not updated,  
+> it's just a fork of the same version with some tests to  
+> conform to Google Play Store's strict policy.  
+>
+> See more info in Termux dev's Google Play announcement:  
+> https://github.com/termux/termux-app/discussions/4000  
+> Termux dev team recommends using GitHub or  
+> F-Droid instead of the Google Play Store version.  
+> Also, the script is not tested on the Play Store version,  
 > so you may encounter issues not present in GH/FD versions."
 
 -----
