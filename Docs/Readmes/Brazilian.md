@@ -2,10 +2,10 @@
 
 <div align="right">
     <a href="../../README.md" target="_blank">
-        <img src="../img/readme/flag_eua.png" height="25" width="25">
+        <img src="../img/readme/flag_us.png" height="25" width="25">
     </a>
     <a href="Russian.md" target="_blank">
-        <img src="../img/readme/russian.png" height="25" width="25">
+        <img src="../img/readme/flag_ru.png" height="25" width="25">
     </a>
 </div>
 
@@ -46,16 +46,19 @@ Vejam a [Documentação](../PT-BR/Documentação.md)
 - Suporte para baixar pacotes de idioma da comunidade (nossos projetos e outras traduções — atualmente oculto no script).
 
 > [!WARNING]
-> O TermuxDepotDownloader não é recomendado de se utilizar no Termux da Play Store, use o do F-droid ou do GitHub.
-> Aviso retirado do prório TermuxDepotDownloader:
-> "A versão da Google Play Store na verdade não está atualizada,
-> é apenas um fork da mesma versão com alguns testes para
-> cumprir a rígida política da Play Store.
-> Veja mais informações no anúncio dos desenvolvedores do Termux na Google Play:
-> https://github.com/termux/termux-app/discussions/4000
-> A equipe de desenvolvimento do Termux recomenda usar o GitHub ou
-> F-Droid em vez da versão da Google Play Store.
-> Além disso, o script não é testado na versão da Play Store,
+> O TermuxDepotDownloader não é recomendado de se utilizar no Termux da Play Store,  
+> use o do F-droid ou do GitHub.  
+>
+> Aviso retirado do prório TermuxDepotDownloader:  
+> "A versão da Google Play Store na verdade não está atualizada,  
+> é apenas um fork da mesma versão com alguns testes para  
+> cumprir a rígida política da Play Store.  
+>
+> Veja mais informações no anúncio dos desenvolvedores do Termux na Google Play:  
+> https://github.com/termux/termux-app/discussions/4000  
+> A equipe de desenvolvimento do Termux recomenda usar o GitHub ou  
+> F-Droid em vez da versão da Google Play Store.  
+> Além disso, o script não é testado na versão da Play Store,  
 > então você pode encontrar problemas que não ocorrem nas versões GH/FD."
 
 -----
