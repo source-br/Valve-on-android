@@ -153,7 +153,7 @@ declare -A COMMUNITY_OUTDIRS
 # COMMUNITY_OUTDIRS["220:420,pt-BR"]="~/storage/srceng"
 
 # Half-Life 1 (app 70, depot 1 new)
-COMMUNITY_URLS["70:1,pt-BR"]="https://github.com/source-br/Xash3D-pt-br/releases/download/1.0/Half.life.1.7z"
+COMMUNITY_URLS["70:1,pt-BR"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Xash-Brazilian.7z"
 COMMUNITY_OUTFILES["70:1,pt-BR"]="valve_brazilian.7z"
 COMMUNITY_OUTDIRS["70:1,pt-BR"]="~/storage/xash"
 
