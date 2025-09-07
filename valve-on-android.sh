@@ -153,11 +153,229 @@ declare -A COMMUNITY_OUTDIRS
 # COMMUNITY_OUTDIRS["220:420,pt-BR"]="~/storage/srceng"
 
 # Half-Life 1 (app 70, depot 1 new)
-COMMUNITY_URLS["70:1,pt-BR"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Xash-Brazilian.7z"
+COMMUNITY_URLS["70:1,pt-BR"]="https://github.com/source-br/Community-Translations-for-Half-Life/releases/download/continuous/Xash-Brazilian.7z"
 COMMUNITY_OUTFILES["70:1,pt-BR"]="valve_brazilian.7z"
-COMMUNITY_OUTDIRS["70:1,pt-BR"]="~/storage/xash"
+COMMUNITY_OUTDIRS["70:1,pt-BR"]="/storage/emulated/0/xash"
 
+# ==========================================
+# COMMUNITY helpers: detect extractor, install if missing, extract 7z, download+extract
+# ==========================================
+try_install_p7zip() {
+    echo -e "${YELLOW}7z extractor not found. Attempting to install p7zip (non-interactive)...${RESET}"
+    # Try Termux / Debian / Alpine / Arch / Fedora / openSUSE
+    if command -v pkg >/dev/null 2>&1; then
+        pkg install -y p7zip 2>/dev/null || pkg install -y p7zip-full 2>/dev/null
+    fi
 
+    if command -v apt-get >/dev/null 2>&1; then
+        if command -v sudo >/dev/null 2>&1; then
+            sudo apt-get update -y 2>/dev/null
+            sudo apt-get install -y p7zip-full 2>/dev/null
+        else
+            apt-get update -y 2>/dev/null || true
+            apt-get install -y p7zip-full 2>/dev/null || true
+        fi
+    fi
+
+    if command -v apk >/dev/null 2>&1; then
+        if command -v sudo >/dev/null 2>&1; then
+            sudo apk add p7zip 2>/dev/null || true
+        else
+            apk add --no-cache p7zip 2>/dev/null || true
+        fi
+    fi
+
+    if command -v pacman >/dev/null 2>&1; then
+        pacman -Sy --noconfirm p7zip 2>/dev/null || true
+    fi
+
+    if command -v dnf >/dev/null 2>&1; then
+        if command -v sudo >/dev/null 2>&1; then
+            sudo dnf install -y p7zip p7zip-plugins 2>/dev/null || true
+        else
+            dnf install -y p7zip p7zip-plugins 2>/dev/null || true
+        fi
+    fi
+
+    if command -v yum >/dev/null 2>&1; then
+        if command -v sudo >/dev/null 2>&1; then
+            sudo yum install -y p7zip p7zip-plugins 2>/dev/null || true
+        else
+            yum install -y p7zip p7zip-plugins 2>/dev/null || true
+        fi
+    fi
+
+    if command -v zypper >/dev/null 2>&1; then
+        zypper -n install p7zip 2>/dev/null || true
+    fi
+
+    # give system a moment then check again
+    sleep 1
+    return 0
+}
+
+find7z() {
+    # prefer explicit binaries, then unar/bsdtar
+    for cmd in 7z 7za 7zr p7zip 7za; do
+        if command -v "$cmd" >/dev/null 2>&1; then
+            echo "$cmd"
+            return 0
+        fi
+    done
+    if command -v unar >/dev/null 2>&1; then
+        echo "unar"
+        return 0
+    fi
+    if command -v bsdtar >/dev/null 2>&1; then
+        echo "bsdtar"
+        return 0
+    fi
+
+    # try automatic install then re-check
+    try_install_p7zip
+    for cmd in 7z 7za 7zr p7zip; do
+        if command -v "$cmd" >/dev/null 2>&1; then
+            echo "$cmd"
+            return 0
+        fi
+    done
+    if command -v unar >/dev/null 2>&1; then
+        echo "unar"
+        return 0
+    fi
+    if command -v bsdtar >/dev/null 2>&1; then
+        echo "bsdtar"
+        return 0
+    fi
+
+    return 1
+}
+
+extract_7z() {
+    local archive="$1"
+    local dest="$2"
+    local extractor
+    local log
+    log="$(mktemp --tmpdir extract_log.XXXX 2>/dev/null || mktemp 2>/dev/null || echo "/tmp/extract_log.$$")"
+
+    extractor=$(find7z) || {
+        echo -e "${YELLOW}7z extractor not found and automatic installation failed. Cannot extract archive.${RESET}"
+        rm -f "$log" 2>/dev/null || true
+        return 1
+    }
+
+    local tmpdir
+    tmpdir="$dest/_extract_tmp_$$"
+    mkdir -p "$tmpdir"
+
+    local success=1
+    # Try a sequence of extract commands depending on detected tools
+    case "$extractor" in
+        7z|7za|7zr|p7zip)
+            if command -v "$extractor" >/dev/null 2>&1; then
+                "$extractor" x "$archive" -o"$tmpdir" -y >>"$log" 2>&1 && success=0 || success=1
+            fi
+            ;;
+        unar)
+            if command -v unar >/dev/null 2>&1; then
+                unar -o "$tmpdir" "$archive" >>"$log" 2>&1 && success=0 || success=1
+            fi
+            ;;
+        bsdtar)
+            if command -v bsdtar >/dev/null 2>&1; then
+                bsdtar -xf "$archive" -C "$tmpdir" >>"$log" 2>&1 && success=0 || success=1
+            fi
+            ;;
+        *)
+            success=1
+            ;;
+    esac
+
+    # If first attempt failed, try other known extractors if available
+    if [[ $success -ne 0 ]]; then
+        for alt in 7z 7za 7zr p7zip unar bsdtar; do
+            [[ "$alt" == "$extractor" ]] && continue
+            if command -v "$alt" >/dev/null 2>&1; then
+                case "$alt" in
+                    7z|7za|7zr|p7zip) "$alt" x "$archive" -o"$tmpdir" -y >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
+                    unar) unar -o "$tmpdir" "$archive" >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
+                    bsdtar) bsdtar -xf "$archive" -C "$tmpdir" >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
+                esac
+            fi
+        done
+    fi
+
+    if [[ $success -ne 0 ]]; then
+        echo -e "${RED}Extraction failed for $archive${RESET}"
+        echo -e "${YELLOW}Extraction log (last 20 lines):${RESET}"
+        tail -n 20 "$log" 2>/dev/null || true
+        rm -rf "$tmpdir"
+        rm -f "$log" 2>/dev/null || true
+        return 1
+    fi
+
+    # Move extracted content:
+    # - if tmpdir contains exactly one directory, move THAT directory's CONTENTS into dest
+    # - otherwise move everything from tmpdir into dest
+    shopt -s dotglob nullglob
+    entries=( "$tmpdir"/* )
+    if (( ${#entries[@]} == 1 )) && [[ -d "${entries[0]}" ]]; then
+        topdir="${entries[0]}"
+        # move contents of topdir into dest (including hidden files)
+        for item in "$topdir"/*; do
+            mv -f "$item" "$dest"/ || {
+                echo -e "${YELLOW}Warning moving $item${RESET}"
+            }
+        done
+        # remove the now-empty topdir
+        rmdir --ignore-fail-on-non-empty "$topdir" 2>/dev/null || rm -rf "$topdir" 2>/dev/null || true
+    else
+        for item in "$tmpdir"/*; do
+            mv -f "$item" "$dest"/ || {
+                echo -e "${YELLOW}Warning moving $item${RESET}"
+            }
+        done
+    fi
+    shopt -u dotglob nullglob
+
+    # cleanup
+    rm -f "$archive"
+    rm -rf "$tmpdir"
+    rm -f "$log" 2>/dev/null || true
+    return 0
+}
+
+download_and_extract_community_pack() {
+    local url="$1"
+    local outdir="$2"
+    local outfile="$3"
+
+    mkdir -p "$outdir"
+    local outpath="$outdir/$outfile"
+
+    echo -e "${BOLD}${GREEN}$LANG_DOWNLOADING${RESET} ${COMMUNITY_LANG_DISPLAY[$selected_comm_lang]:-$selected_comm_lang}"
+    if ! curl -L -f -o "$outpath" "$url"; then
+        echo -e "${RED}$LANG_FAILED_DOWNLOAD${RESET}"
+        [[ -f "$outpath" ]] && rm -f "$outpath"
+        return 1
+    fi
+
+    echo -e "${GREEN}$LANG_SUCCESS_DOWNLOAD${RESET}"
+
+    # If it's a 7z archive, try to extract and cleanup
+    case "${outfile,,}" in
+        *.7z|*.7z.*)
+            if ! extract_7z "$outpath" "$outdir"; then
+                echo -e "${YELLOW}Warning: extraction failed or extractor missing. Archive left in $outdir${RESET}"
+                return 1
+            fi
+            ;;
+        *)
+            # no extraction for other formats
+            ;;
+    esac
+    return 0
+}
 
 # ==========================================
 # Check if depotdownloader is installed
@@ -674,12 +892,10 @@ while true; do
 
             if [[ -n "$url" ]]; then
                 mkdir -p "$outdir"
-                echo -e "${BOLD}${GREEN}$LANG_DOWNLOADING${RESET} ${COMMUNITY_LANG_DISPLAY[$selected_comm_lang]:-$selected_comm_lang}"
-                # use curl with follow-redirects
-                if ! curl -L -f -o "$outdir/$outfile" "$url"; then
-                    echo -e "${RED}$LANG_FAILED_DOWNLOAD${RESET}${RESET}"
-                else
-                    echo -e "${GREEN}$LANG_SUCCESS_DOWNLOAD${RESET}"
+                # use helper to download and extract when appropriate
+                if ! download_and_extract_community_pack "$url" "$outdir" "$outfile"; then
+                    # errors already shown inside helper
+                    :
                 fi
             else
                 echo -e "${YELLOW}$LANG_NO_COMMUNITY_PACK $game_name (${COMMUNITY_LANG_DISPLAY[$selected_comm_lang]:-$selected_comm_lang})${RESET}"
