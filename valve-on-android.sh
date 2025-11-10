@@ -1,6 +1,13 @@
 #!/data/data/com.termux/files/usr/bin/env bash
 
 # ==========================================
+# Safety
+# ==========================================
+set -o pipefail
+shopt -s failglob
+set -u
+
+# ==========================================
 # Environment variables
 # ==========================================
 export SET_DIR="/storage/emulated/0/"
