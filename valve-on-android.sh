@@ -392,7 +392,6 @@ download_and_extract_community_pack() {
 if ! command -v depotdownloader >/dev/null 2>&1; then
     clear
     echo -e "${RED}[!] $LANG_ERROR${RESET} $LANG_DEPOT"
-    echo -e "$LANG_INSTALL_DEPOT"
     sleep 5
     echo -e "${BOLD}${GREEN}$LANG_INSTALLING${RESET} depotdownloader"
     sleep 3
