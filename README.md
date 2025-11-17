@@ -48,7 +48,8 @@ This project aims to make it easier to download Valve games on Android legally.
 > [!WARNING]
 > TermuxDepotDownloader is not recommended for use on the Google Play Store version of Termux.  
 > Use the F-Droid or GitHub version instead.  
->
+> Download link for github version:
+> http://github.com/termux/termux-app/releases/download/v0.118.3/termux-app_v0.118.3+github-debug_universal.apk
 > Warning taken from TermuxDepotDownloader itself:  
 > "Google Play Store version is actually not updated,  
 > it's just a fork of the same version with some tests to  
