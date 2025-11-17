@@ -1,6 +1,7 @@
 # Depot
 LANG_DEPOT="O DepotDownloader é necessário, mas não foi encontrado."
 LANG_TRY_INSTALL_DEPOT="O script tentará instalar o TermuxDepotDownloader em 5 segundos..."
+LANG_TRY_INSTALL_P7ZIP="Extractor 7z não encontrado. Tentando instalar p7zip (não interativo)..."
 
 # Main screen
 LANG_MAIN_OPTION_ALL="Todos os jogos"

@@ -170,57 +170,14 @@ COMMUNITY_OUTDIRS["70:1,pt-BR"]="/storage/emulated/0/xash"
 # COMMUNITY helpers: detect extractor, install if missing, extract 7z, download+extract
 # ==========================================
 try_install_p7zip() {
-    echo -e "${YELLOW}7z extractor not found. Attempting to install p7zip (non-interactive)...${RESET}"
-    # Try Termux / Debian / Alpine / Arch / Fedora / openSUSE
+    echo -e "${YELLOW}$LANG_TRY_INSTALL_P7ZIP${RESET}"
+    # Install by in pkg (Termux)
     if command -v pkg >/dev/null 2>&1; then
         pkg install -y p7zip 2>/dev/null || pkg install -y p7zip-full 2>/dev/null
+        sleep 1
+        return 0
     fi
-
-    if command -v apt-get >/dev/null 2>&1; then
-        if command -v sudo >/dev/null 2>&1; then
-            sudo apt-get update -y 2>/dev/null
-            sudo apt-get install -y p7zip-full 2>/dev/null
-        else
-            apt-get update -y 2>/dev/null || true
-            apt-get install -y p7zip-full 2>/dev/null || true
-        fi
-    fi
-
-    if command -v apk >/dev/null 2>&1; then
-        if command -v sudo >/dev/null 2>&1; then
-            sudo apk add p7zip 2>/dev/null || true
-        else
-            apk add --no-cache p7zip 2>/dev/null || true
-        fi
-    fi
-
-    if command -v pacman >/dev/null 2>&1; then
-        pacman -Sy --noconfirm p7zip 2>/dev/null || true
-    fi
-
-    if command -v dnf >/dev/null 2>&1; then
-        if command -v sudo >/dev/null 2>&1; then
-            sudo dnf install -y p7zip p7zip-plugins 2>/dev/null || true
-        else
-            dnf install -y p7zip p7zip-plugins 2>/dev/null || true
-        fi
-    fi
-
-    if command -v yum >/dev/null 2>&1; then
-        if command -v sudo >/dev/null 2>&1; then
-            sudo yum install -y p7zip p7zip-plugins 2>/dev/null || true
-        else
-            yum install -y p7zip p7zip-plugins 2>/dev/null || true
-        fi
-    fi
-
-    if command -v zypper >/dev/null 2>&1; then
-        zypper -n install p7zip 2>/dev/null || true
-    fi
-
-    # give system a moment then check again
-    sleep 1
-    return 0
+    return 1
 }
 
 find7z() {
