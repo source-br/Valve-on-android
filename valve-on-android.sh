@@ -855,9 +855,31 @@ while true; do
             key_dep="${appid}:${depot},${selected_comm_lang}"
             key_app="${appid},${selected_comm_lang}"
 
-            url="${COMMUNITY_URLS[$key_dep]:-${COMMUNITY_URLS[$key_app]}}"
-            outfile="${COMMUNITY_OUTFILES[$key_dep]:-${COMMUNITY_OUTFILES[$key_app]:-${appid}_${selected_comm_lang}.zip}}"
-            outdir="${COMMUNITY_OUTDIRS[$key_dep]:-${COMMUNITY_OUTDIRS[$key_app]:-$PWD/downloads}}"
+            url=""
+            if [[ -n "${COMMUNITY_URLS[$key_dep]+set}" ]]; then
+                url="${COMMUNITY_URLS[$key_dep]}"
+            elif [[ -n "${COMMUNITY_URLS[$key_app]+set}" ]]; then
+                url="${COMMUNITY_URLS[$key_app]}"
+            else
+                url=""
+            fi
+
+            if [[ -n "${COMMUNITY_OUTFILES[$key_dep]+set}" ]]; then
+                outfile="${COMMUNITY_OUTFILES[$key_dep]}"
+            elif [[ -n "${COMMUNITY_OUTFILES[$key_app]+set}" ]]; then
+                outfile="${COMMUNITY_OUTFILES[$key_app]}"
+            else
+                outfile="${appid}_${selected_comm_lang}.zip"
+            fi
+
+            # outdir: prefer specific depot key, then app key, then "$PWD/downloads"
+            if [[ -n "${COMMUNITY_OUTDIRS[$key_dep]+set}" ]]; then
+                outdir="${COMMUNITY_OUTDIRS[$key_dep]}"
+            elif [[ -n "${COMMUNITY_OUTDIRS[$key_app]+set}" ]]; then
+                outdir="${COMMUNITY_OUTDIRS[$key_app]}"
+            else
+                outdir="$PWD/downloads"
+            fi
 
             if [[ -n "$url" ]]; then
                 mkdir -p "$outdir"
