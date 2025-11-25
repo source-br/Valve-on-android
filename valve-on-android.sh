@@ -186,7 +186,7 @@ try_install_7zip() {
 
 find7z() {
     # prefer explicit 7z binaries, then unar/bsdtar
-    for cmd in 7z 7za 7zr; do
+    for cmd in 7zz 7z 7za 7zr; do
         if command -v "$cmd" >/dev/null 2>&1; then
             echo "$cmd"
             return 0
@@ -203,7 +203,7 @@ find7z() {
 
     # try automatic install (7zip via pkg) then re-check
     try_install_7zip
-    for cmd in 7z 7za 7zr; do
+    for cmd in 7zz 7z 7za 7zr; do
         if command -v "$cmd" >/dev/null 2>&1; then
             echo "$cmd"
             return 0
@@ -241,7 +241,7 @@ extract_7z() {
     local success=1
     # Try a sequence of extract commands depending on detected tools (no p7zip)
     case "$extractor" in
-        7z|7za|7zr)
+        7zz|7z|7za|7zr)
             if command -v "$extractor" >/dev/null 2>&1; then
                 "$extractor" x "$archive" -o"$tmpdir" -y >>"$log" 2>&1 && success=0 || success=1
             fi
@@ -263,11 +263,11 @@ extract_7z() {
 
     # If first attempt failed, try other known extractors if available (no p7zip)
     if [[ $success -ne 0 ]]; then
-        for alt in 7z 7za 7zr unar bsdtar; do
+        for alt in 7zz 7z 7za 7zr unar bsdtar; do
             [[ "$alt" == "$extractor" ]] && continue
             if command -v "$alt" >/dev/null 2>&1; then
                 case "$alt" in
-                    7z|7za|7zr) "$alt" x "$archive" -o"$tmpdir" -y >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
+                    7zz|7z|7za|7zr) "$alt" x "$archive" -o"$tmpdir" -y >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
                     unar) unar -o "$tmpdir" "$archive" >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
                     bsdtar) bsdtar -xf "$archive" -C "$tmpdir" >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
                 esac
