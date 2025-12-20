@@ -718,7 +718,7 @@ while true; do
                                 for lang_code in "${!COMMUNITY_LANG_DISPLAY[@]}"; do
                                     key_dep="${appid}:${depot},${lang_code}"
                                     key_app="${appid},${lang_code}"
-                                    if [[ -n "${COMMUNITY_URLS[$key_dep]}" || -n "${COMMUNITY_URLS[$key_app]}" ]]; then
+                                    if [[ -n "${COMMUNITY_URLS[$key_dep]:-}" || -n "${COMMUNITY_URLS[$key_app]:-}" ]]; then
                                         # add if not already present
                                         if ! printf '%s\n' "${community_available_langs[@]}" | grep -qx "$lang_code"; then
                                             community_available_langs+=("$lang_code")
