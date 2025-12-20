@@ -27,6 +27,10 @@ LANG_ASK_LANGUAGE_PACKS="Deseja baixar pacotes de idioma adicionais?"
 LANG_SELECT_LANGUAGE_PACK="Selecione o pacote de idioma que deseja incluir:"
 LANG_SELECT_COMMUNITY_LANGUAGE="Qual tipo de pacote de tradução?"
 
+# Community messages
+LANG_NO_COMMUNITY_PACK="Pacote comunitário não disponível para"
+LANG_NO_COMMUNITY_PACKS_AVAILABLE="Nenhum pacote comunitário disponível para os jogos selecionados."
+
 # Languages
 LANG_ENGLISH="English (Inglês)"
 LANG_SPANISH_E="Español España (Espanhol Espanha)"
