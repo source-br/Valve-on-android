@@ -147,13 +147,13 @@ declare -A COMMUNITY_OUTDIRS
 # --------- Examples (edit/add according to your packages) ---------
 # Fallback by appid (when you don't want to specify depot, don't put the number after the : of the number)
 # Half-Life 2 (HL2 base: app 220 depot 221)
-COMMUNITY_URLS["220:221,pt-BR"]="https://github.com/source-br/Community-Translations-for-Source/releases/download/continuous/Half-Life-2-Brazilian.7z"
-COMMUNITY_OUTFILES["220:221,pt-BR"]="HL2_Brazilian.7z"
+COMMUNITY_URLS["220:221,pt-BR"]="https://github.com/source-br/Community-Translations-for-Source/releases/download/continuous/Half-Life-2-Brazilian.zip"
+COMMUNITY_OUTFILES["220:221,pt-BR"]="HL2_Brazilian.zip"
 COMMUNITY_OUTDIRS["220:221,pt-BR"]="/storage/emulated/0/srceng/hl2/"
 
 # HL2 Episode One (app 220 depot 389/380)
-COMMUNITY_URLS["220:389,pt-BR"]="https://github.com/source-br/Community-Translations-for-Source/releases/download/continuous/Half-Life-2-Episode-One-Brazilian.7z"
-COMMUNITY_OUTFILES["220:389,pt-BR"]="HL2_EP1_Brazilian.7z"
+COMMUNITY_URLS["220:389,pt-BR"]="https://github.com/source-br/Community-Translations-for-Source/releases/download/continuous/Half-Life-2-Episode-One-Brazilian.zip"
+COMMUNITY_OUTFILES["220:389,pt-BR"]="HL2_EP1_Brazilian.zip"
 COMMUNITY_OUTDIRS["220:389,pt-BR"]="/storage/emulated/0/srceng/episodic/"
 
 # HL2 Episode Two (app 220 depot 420)
@@ -162,9 +162,19 @@ COMMUNITY_OUTDIRS["220:389,pt-BR"]="/storage/emulated/0/srceng/episodic/"
 # COMMUNITY_OUTDIRS["220:420,pt-BR"]="~/storage/srceng"
 
 # Half-Life 1 (app 70, depot 1 new)
-COMMUNITY_URLS["70:1,pt-BR"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Half-Life-Xash-Brazilian.7z"
-COMMUNITY_OUTFILES["70:1,pt-BR"]="valve_brazilian.7z"
+COMMUNITY_URLS["70:1,pt-BR"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Half-Life-Xash-Brazilian.zip"
+COMMUNITY_OUTFILES["70:1,pt-BR"]="valve_brazilian.zip"
 COMMUNITY_OUTDIRS["70:1,pt-BR"]="/storage/emulated/0/xash"
+
+# Half-Life: Opposing Force (app 50, depot 51 new)
+COMMUNITY_URLS["50:51,pt-BR"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Half-Life-Opposing-Force-Brazilian.zip"
+COMMUNITY_OUTFILES["50:51,pt-BR"]="gearbox_brazilian.zip"
+COMMUNITY_OUTDIRS["50:51,pt-BR"]="/storage/emulated/0/xash"
+
+# Half-Life: Blue Shift (app 130, depot 130 new)
+COMMUNITY_URLS["130:130,pt-BR"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Half-Life-Blue-Shift-Brazilian.zip"
+COMMUNITY_OUTFILES["130:130,pt-BR"]="bshift_brazilian.zip"
+COMMUNITY_OUTDIRS["130:130,pt-BR"]="/storage/emulated/0/xash"
 
 # ==========================================
 # COMMUNITY helpers: detect extractor, install if missing, extract 7z, download+extract
