@@ -147,14 +147,14 @@ declare -A COMMUNITY_OUTDIRS
 # --------- Examples (edit/add according to your packages) ---------
 # Fallback by appid (when you don't want to specify depot, don't put the number after the : of the number)
 # Half-Life 2 (HL2 base: app 220 depot 221)
-# COMMUNITY_URLS["220:221,pt-BR"]=""
-# COMMUNITY_OUTFILES["220:221,pt-BR"]="HL2_Brazilian.7z"
-# COMMUNITY_OUTDIRS["220:221,pt-BR"]="~/~/storage/srceng"
+COMMUNITY_URLS["220:221,pt-BR"]="https://github.com/source-br/Community-Translations-for-Source/releases/download/continuous/Half-Life-2-Brazilian.7z"
+COMMUNITY_OUTFILES["220:221,pt-BR"]="HL2_Brazilian.7z"
+COMMUNITY_OUTDIRS["220:221,pt-BR"]="/storage/emulated/0/srceng/hl2/"
 
 # HL2 Episode One (app 220 depot 389/380)
-# COMMUNITY_URLS["220:389,pt-BR"]=""
-# COMMUNITY_OUTFILES["220:389,pt-BR"]="HL2_EP1_Brazilian.7z"
-# COMMUNITY_OUTDIRS["220:389,pt-BR"]="~/~/storage/srceng"
+COMMUNITY_URLS["220:389,pt-BR"]="https://github.com/source-br/Community-Translations-for-Source/releases/download/continuous/Half-Life-2-Episode-One-Brazilian.7z"
+COMMUNITY_OUTFILES["220:389,pt-BR"]="HL2_EP1_Brazilian.7z"
+COMMUNITY_OUTDIRS["220:389,pt-BR"]="/storage/emulated/0/srceng/episodic/"
 
 # HL2 Episode Two (app 220 depot 420)
 # COMMUNITY_URLS["220:420,pt-BR"]=""
@@ -162,7 +162,7 @@ declare -A COMMUNITY_OUTDIRS
 # COMMUNITY_OUTDIRS["220:420,pt-BR"]="~/storage/srceng"
 
 # Half-Life 1 (app 70, depot 1 new)
-COMMUNITY_URLS["70:1,pt-BR"]="https://github.com/source-br/Community-Translations-for-Half-Life/releases/download/continuous/Xash-Brazilian.7z"
+COMMUNITY_URLS["70:1,pt-BR"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Half-Life-Xash-Brazilian.7z"
 COMMUNITY_OUTFILES["70:1,pt-BR"]="valve_brazilian.7z"
 COMMUNITY_OUTDIRS["70:1,pt-BR"]="/storage/emulated/0/xash"
 
@@ -643,7 +643,7 @@ while true; do
                     echo -e "${BOLD}$LANG_TRANSLATION_TYPE${RESET}"
                     echo
                     echo "1) $LANG_TRANSLATION_OFFICIAL"
-                  # echo "2) $LANG_TRANSLATION_COMMUNITY"
+                    echo "2) $LANG_TRANSLATION_COMMUNITY"
 					echo
                     echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
                     echo "============================"
