@@ -177,26 +177,26 @@ COMMUNITY_OUTFILES["130:130,pt-BR"]="bshift_brazilian.zip"
 COMMUNITY_OUTDIRS["130:130,pt-BR"]="/storage/emulated/0/xash"
 
 # ==========================================
-# COMMUNITY helpers: detect extractor, install if missing, extract 7z, download+extract
+# COMMUNITY helpers: detect extractor, install if missing, extract zip, download+extract
 # ==========================================
-try_install_7zip() {
-    # Try installing only the "7zip" package via pkg.
+try_install_unzip() {
+    # Try installing only the "unzip" package via pkg.
     echo -e "${YELLOW}$LANG_TRY_INSTALL_7ZIP${RESET}"
     if command -v pkg >/dev/null 2>&1; then
-        if pkg install -y 7zip >/dev/null 2>&1; then
+        if pkg install -y unzip >/dev/null 2>&1; then
             sleep 1
             return 0
         else
-            echo -e "${YELLOW}pkg install 7zip failed or not available.${RESET}"
+            echo -e "${YELLOW}pkg install unzip failed or not available.${RESET}"
             return 1
         fi
     fi
     return 1
 }
 
-find7z() {
-    # prefer explicit 7z binaries, then unar/bsdtar
-    for cmd in 7zz 7z 7za 7zr; do
+find_zip_extractor() {
+    # prefer explicit unzip, then unar/bsdtar, then 7z
+    for cmd in unzip; do
         if command -v "$cmd" >/dev/null 2>&1; then
             echo "$cmd"
             return 0
@@ -210,15 +210,19 @@ find7z() {
         echo "bsdtar"
         return 0
     fi
+    for cmd in 7zz 7z 7za 7zr; do
+        if command -v "$cmd" >/dev/null 2>&1; then
+            echo "$cmd"
+            return 0
+        fi
+    done
 
-    # try automatic install (7zip via pkg) then re-check
-    try_install_7zip
-    for cmd in 7zz 7z 7za 7zr; do
-        if command -v "$cmd" >/dev/null 2>&1; then
-            echo "$cmd"
-            return 0
-        fi
-    done
+    # try automatic install (unzip via pkg) then re-check
+    try_install_unzip
+    if command -v unzip >/dev/null 2>&1; then
+        echo "unzip"
+        return 0
+    fi
     if command -v unar >/dev/null 2>&1; then
         echo "unar"
         return 0
@@ -227,19 +231,25 @@ find7z() {
         echo "bsdtar"
         return 0
     fi
+    for cmd in 7zz 7z 7za 7zr; do
+        if command -v "$cmd" >/dev/null 2>&1; then
+            echo "$cmd"
+            return 0
+        fi
+    done
 
     return 1
 }
 
-extract_7z() {
+extract_zip() {
     local archive="$1"
     local dest="$2"
     local extractor
     local log
     log="$(mktemp --tmpdir extract_log.XXXX 2>/dev/null || mktemp 2>/dev/null || echo "/tmp/extract_log.$$")"
 
-    extractor=$(find7z) || {
-        echo -e "${YELLOW}7z extractor not found and automatic installation failed. Cannot extract archive.${RESET}"
+    extractor=$(find_zip_extractor) || {
+        echo -e "${YELLOW}zip extractor not found and automatic installation failed. Cannot extract archive.${RESET}"
         rm -f "$log" 2>/dev/null || true
         return 1
     }
@@ -249,11 +259,11 @@ extract_7z() {
     mkdir -p "$tmpdir"
 
     local success=1
-    # Try a sequence of extract commands depending on detected tools (no p7zip)
+    # Try a sequence of extract commands depending on detected tools
     case "$extractor" in
-        7zz|7z|7za|7zr)
-            if command -v "$extractor" >/dev/null 2>&1; then
-                "$extractor" x "$archive" -o"$tmpdir" -y >>"$log" 2>&1 && success=0 || success=1
+        unzip)
+            if command -v unzip >/dev/null 2>&1; then
+                unzip -o "$archive" -d "$tmpdir" >>"$log" 2>&1 && success=0 || success=1
             fi
             ;;
         unar)
@@ -266,20 +276,26 @@ extract_7z() {
                 bsdtar -xf "$archive" -C "$tmpdir" >>"$log" 2>&1 && success=0 || success=1
             fi
             ;;
+        7zz|7z|7za|7zr)
+            if command -v "$extractor" >/dev/null 2>&1; then
+                "$extractor" x "$archive" -o"$tmpdir" -y >>"$log" 2>&1 && success=0 || success=1
+            fi
+            ;;
         *)
             success=1
             ;;
     esac
 
-    # If first attempt failed, try other known extractors if available (no p7zip)
+    # If first attempt failed, try other known extractors if available
     if [[ $success -ne 0 ]]; then
-        for alt in 7zz 7z 7za 7zr unar bsdtar; do
+        for alt in unzip unar bsdtar 7zz 7z 7za 7zr; do
             [[ "$alt" == "$extractor" ]] && continue
             if command -v "$alt" >/dev/null 2>&1; then
                 case "$alt" in
-                    7zz|7z|7za|7zr) "$alt" x "$archive" -o"$tmpdir" -y >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
+                    unzip) unzip -o "$archive" -d "$tmpdir" >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
                     unar) unar -o "$tmpdir" "$archive" >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
                     bsdtar) bsdtar -xf "$archive" -C "$tmpdir" >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
+                    7zz|7z|7za|7zr) "$alt" x "$archive" -o"$tmpdir" -y >>"$log" 2>&1 && { success=0; break; } || success=1 ;;
                 esac
             fi
         done
@@ -342,10 +358,10 @@ download_and_extract_community_pack() {
 
     echo -e "${GREEN}$LANG_SUCCESS_DOWNLOAD${RESET}"
 
-    # If it's a 7z archive, try to extract and cleanup
+    # If it's a zip archive, try to extract and cleanup
     case "${outfile,,}" in
-        *.7z|*.7z.*)
-            if ! extract_7z "$outpath" "$outdir"; then
+        *.zip|*.zip.*)
+            if ! extract_zip "$outpath" "$outdir"; then
                 echo -e "${YELLOW}Warning: extraction failed or extractor missing. Archive left in $outdir${RESET}"
                 return 1
             fi
