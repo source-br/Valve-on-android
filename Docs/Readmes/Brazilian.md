@@ -49,17 +49,17 @@ Vejam a [Documentação](../PT-BR/Documentação.md)
 > O TermuxDepotDownloader não é recomendado de se utilizar no Termux da Play Store,  
 > use o do F-droid ou do GitHub.  
 >
-> Aviso retirado do prório TermuxDepotDownloader:  
+> Aviso retirado do próprio TermuxDepotDownloader:  
 > "A versão da Google Play Store na verdade não está atualizada,  
 > é apenas um fork da mesma versão com alguns testes para  
-> cumprir a rígida política da Play Store.  
+> cumprir a rígida política da Play Store."
 >
 > Veja mais informações no anúncio dos desenvolvedores do Termux na Google Play:  
 > https://github.com/termux/termux-app/discussions/4000  
 > A equipe de desenvolvimento do Termux recomenda usar o GitHub ou  
 > F-Droid em vez da versão da Google Play Store.  
 > Além disso, o script não é testado na versão da Play Store,  
-> então você pode encontrar problemas que não ocorrem nas versões GH/FD."
+> então você pode encontrar problemas que não ocorrem nas versões GH/FD.
 
 -----
 Copie e cole o comando abaixo no Termux para usar o script:
