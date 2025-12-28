@@ -167,12 +167,12 @@ COMMUNITY_OUTFILES["70:1,pt-BR"]="valve_brazilian.zip"
 COMMUNITY_OUTDIRS["70:1,pt-BR"]="/storage/emulated/0/xash"
 
 # Half-Life: Opposing Force (app 50, depot 51 new)
-COMMUNITY_URLS["50:51,pt-BR"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Half-Life-Opposing-Force-Brazilian.zip"
+COMMUNITY_URLS["50:51,pt-BR"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Half-Life-Opposing-Force-Xash-Brazilian.zip"
 COMMUNITY_OUTFILES["50:51,pt-BR"]="gearbox_brazilian.zip"
 COMMUNITY_OUTDIRS["50:51,pt-BR"]="/storage/emulated/0/xash"
 
 # Half-Life: Blue Shift (app 130, depot 130 new)
-COMMUNITY_URLS["130:130,pt-BR"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Half-Life-Blue-Shift-Brazilian.zip"
+COMMUNITY_URLS["130:130,pt-BR"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Half-Life-Blue-Shift-Xash-Brazilian.zip"
 COMMUNITY_OUTFILES["130:130,pt-BR"]="bshift_brazilian.zip"
 COMMUNITY_OUTDIRS["130:130,pt-BR"]="/storage/emulated/0/xash"
 
