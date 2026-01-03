@@ -186,7 +186,7 @@ COMMUNITY_OUTDIRS["130:130,RU"]="/storage/emulated/0/xash"
 # Counter-Strike (app 10, depot 11 new)
 COMMUNITY_URLS["10:11,RU"]="https://github.com/source-br/Community-Translations-for-GoldSrc/releases/download/continuous/Counter-Strike-Xash-Russian.zip"
 COMMUNITY_OUTFILES["10:11,RU"]="cs_russian.zip"
-COMMUNITY_OUTDIRS["10:11,RU"]="/storage/emulated/0/cstrike"
+COMMUNITY_OUTDIRS["10:11,RU"]="/storage/emulated/0/xash"
 
 # ==========================================
 # COMMUNITY helpers: detect extractor, install if missing, extract zip, download+extract
