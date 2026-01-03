@@ -134,8 +134,8 @@ declare -A lang_display_names=(
 # Display of community languages with strings (safe fallback)
 declare -A COMMUNITY_LANG_DISPLAY=(
     ["pt-BR"]="$LANG_PORTUGUESE_BRAZIL | $LANG_BY_SRBR_MPD"
-    ["es-419"]="$LANG_SPANISH_L}"
-    ["RU"]="$LANG_RUSSIAN}"
+    ["es-419"]="$LANG_SPANISH_LATIN_AMERICA"
+    ["RU"]="$LANG_RUSSIAN"
 )
 
 # URLs
