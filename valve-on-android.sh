@@ -685,7 +685,7 @@ while true; do
 					echo
                     echo -e "${RED}b) $LANG_OPTION_BACK${RESET}"
                     echo "============================"
-                    read -p "$LANG_PROMPT_CHOOSE (1-1): " translation_type
+                    read -p "$LANG_PROMPT_CHOOSE (1-2): " translation_type
 
                     if [[ "$translation_type" == "b" ]]; then
                         break
